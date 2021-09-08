@@ -1,4 +1,4 @@
-> The Arctica Shipping Company cyber range is an offensive range that contains a Windows domain with connected Windows hosts and an intranet website. 
+> The Artica Shipping Company cyber range is an offensive range that contains a Windows domain with connected Windows hosts and an intranet website. 
 > You will assume the role of a penetration tester conducting a test against Artica's internal network. You have access to its offices and internal network via an Ethernet connection. The IP addresses have been provided for the host on the network, and you've been told which is the domain controller and which host is the intrante web application server. No other information has been provided.
 
 ## Question 1: What type of server does Unknown Host 1 appear to be?
