@@ -172,7 +172,9 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/132582340-53152dfe-fe21-4e07-b110-68912ab74e39.png)
 
-- After logon to Host 2 we cosnider to look after the unqutoed service path vulnerability. For that we search the internet for more details ... 
+- After logon to Host 2 we consider to look after the unquoted service path vulnerability. To get started we search the internet for more details ... 
 - And here we go: [https://pentestlab.blog/2017/03/09/unquoted-service-path/](https://pentestlab.blog/2017/03/09/unquoted-service-path/)
     -  We open CMD on Host 2 and enter: `wmic service get name,displayname,pathname,startmode |findstr /i “auto” |findstr /i /v “c:\windows\\” |findstr /i /v “””`
     -  Then we start services.msc and look for the name of service and check the process owner
+
+**to be continued**
