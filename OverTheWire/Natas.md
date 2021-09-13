@@ -8,3 +8,30 @@
 ![grafik](https://user-images.githubusercontent.com/84674087/133155920-d7b3aa9c-886f-4087-a5f3-dfc95e0bb71e.png)
 
 ## Natas1
+
+![grafik](https://user-images.githubusercontent.com/84674087/133156164-fa3372d1-bf4f-46a5-b1dd-e79427041888.png)
+
+- Open WebDev Tool: `Strg + Shift + E`
+- Password: **ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi**
+
+![grafik](https://user-images.githubusercontent.com/84674087/133156322-b89aec88-d8cc-49a8-8cf1-9c8017ed4a90.png)
+
+## Natas2
+
+![grafik](https://user-images.githubusercontent.com/84674087/133156488-d55227b2-f89b-4b21-94e9-f6937be6b375.png)
+
+- Open Source Code
+- Investigate directory `/files/`
+- Take a look at `/files/user.txt`
+- Password: **sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14**
+
+![grafik](https://user-images.githubusercontent.com/84674087/133156859-5fbeceae-4245-4fc9-804d-8b1d4fe3d72b.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/133156942-396cebe3-40e4-47c9-80c7-f22afdbc0871.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/133157019-cf70a75f-b942-4113-9cf9-0b4856b9da1b.png)
+
+## Natas3
+
+![grafik](https://user-images.githubusercontent.com/84674087/133157139-ea4a3b16-6c6c-4859-984c-80ac5b0feb56.png)
+
