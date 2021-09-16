@@ -144,3 +144,84 @@ include "includes/secret.inc";
 
 #### Solution
 
+- Check out sourcecode: `Control + U`
+![grafik](https://user-images.githubusercontent.com/84674087/133649993-a44b258d-6c37-45ee-a43e-e750d0f2ef56.png)
+
+- Try to use the hint as parameter
+- *http://natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8*
+- This reveals the password: **DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe**
+
+<br />
+
+## Natas8
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133650338-90c43fce-223a-44b2-9c9d-3c0d31c3f2e2.png)
+
+#### Solution
+
+- Check out sourcecode:
+```
+<?
+
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+
+if(array_key_exists("submit", $_POST)) {
+    if(encodeSecret($_POST['secret']) == $encodedSecret) {
+    print "Access granted. The password for natas9 is <censored>";
+    } else {
+    print "Wrong secret";
+    }
+}
+?>
+```
+
+- This line must be reversed to encode the given $encodedSecret: `bin2hex(strrev(base64_encode($secret)))`
+- One can use following website for testing: [www.w3schools.com/PHP](https://www.w3schools.com/PHP/phptryit.asp?filename=tryphp_func_string_bin2hex)
+
+```
+<?php 
+$str = "3d3d516343746d4d6d6c315669563362";
+$str = pack("H*", $str);
+$str = strrev($str);
+$str = base64_decode($str);
+echo($str); 
+?>
+```
+
+- the calculated secret: **oubWYf2kBq**
+- Password: **W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl**
+
+<br />
+
+## Natas9
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133651714-d9400fed-be7c-4919-863e-aedbb71147c2.png)
+
+#### Solution
+
+- Sourcecode:
+```
+
+Output:
+<pre>
+<?
+$key = "";
+
+if(array_key_exists("needle", $_REQUEST)) {
+    $key = $_REQUEST["needle"];
+}
+
+if($key != "") {
+    passthru("grep -i $key dictionary.txt");
+}
+?>
+</pre>
+```
