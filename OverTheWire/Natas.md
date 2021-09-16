@@ -1,6 +1,10 @@
 ## Natas0
 
+#### Task
+
 ![grafik](https://user-images.githubusercontent.com/84674087/133155764-5376c618-69cb-45ef-b76f-3a4060879765.png)
+
+#### Solution
 
 - Open source code: `Control + U`
 - Password: **gtVrDuiDfck831PqWsLEZy5gyDz1clto**
@@ -11,9 +15,13 @@
 
 ## Natas1
 
+#### Task
+
 ![grafik](https://user-images.githubusercontent.com/84674087/133156164-fa3372d1-bf4f-46a5-b1dd-e79427041888.png)
 
-- Open WebDev Tool: `Strg + Shift + E`
+#### Solution
+
+- Open WebDev Tool: `Control + Shift + E`
 - Password: **ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi**
 
 ![grafik](https://user-images.githubusercontent.com/84674087/133156322-b89aec88-d8cc-49a8-8cf1-9c8017ed4a90.png)
@@ -22,7 +30,11 @@
 
 ## Natas2
 
+#### Task
+
 ![grafik](https://user-images.githubusercontent.com/84674087/133156488-d55227b2-f89b-4b21-94e9-f6937be6b375.png)
+
+#### Solution
 
 - Open Source Code: `Control + U`
 - Investigate directory `/files/`
@@ -39,7 +51,11 @@
 
 ## Natas3
 
+#### Task
+
 ![grafik](https://user-images.githubusercontent.com/84674087/133157139-ea4a3b16-6c6c-4859-984c-80ac5b0feb56.png)
+
+#### Solution
 
 - Open Source Code: `Control + U`
 
@@ -49,9 +65,82 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/133630834-c9ce6483-d91d-44a8-93ce-961acfc66353.png)
 
-- - Password: **Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ**
+- Enter: *http://natas3.natas.labs.overthewire.org/s3cr3t/*
+- Password: **Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ**
 
 <br />
 
 ## Natas4
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133631392-ef5eabe7-5f06-4294-90b4-fa21361059f2.png)
+
+#### Solution
+
+- Change the referrer accordingly, for example via BurpSuite:
+
+![grafik](https://user-images.githubusercontent.com/84674087/133634576-0849712e-9c14-4541-bd2a-08a067f9cc4c.png)
+
+- Password: **iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq**
+
+<br />
+
+## Natas5
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133635013-71ae3aaf-90f5-455b-93a5-a28eb07b506c.png)
+
+#### Solution
+
+- Open WebDev Tool: `Control + Shift + E`
+- Got to Storage, check Cookies
+- Change Cookie value from 0 to 1
+- Password: **aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1**
+
+![grafik](https://user-images.githubusercontent.com/84674087/133635138-5d0b55bb-438a-475a-9298-1741496109ad.png)
+
+<br />
+
+## Natas6
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133635978-63058451-924f-4a2c-b4b8-1ba0008c752e.png)
+
+#### Solution
+
+- Sourcecode:
+```
+
+<?
+
+include "includes/secret.inc";
+
+    if(array_key_exists("submit", $_POST)) {
+        if($secret == $_POST['secret']) {
+        print "Access granted. The password for natas7 is <censored>";
+    } else {
+        print "Wrong secret";
+    }
+    }
+?>
+```
+
+- Check out: *http://natas6.natas.labs.overthewire.org/includes/secret.inc*
+- Hoewever, nothing is shown ...
+- Check out sourcecode: `Control + U`
+- There we go: **FOEIUWGHFEEUHOFUOIU** (secret)
+- This reveals the password: **7z3hEENjQtflzgnT29q7wAvMNfZdh0i9**
+
+<br />
+
+## Natas7
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133637159-fa6492e5-d59a-44c5-9de2-e0d775aa3a75.png)
+
+#### Solution
 
