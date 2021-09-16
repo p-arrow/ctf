@@ -145,10 +145,10 @@ include "includes/secret.inc";
 #### Solution
 
 - Check out sourcecode: `Control + U`
+
 ![grafik](https://user-images.githubusercontent.com/84674087/133649993-a44b258d-6c37-45ee-a43e-e750d0f2ef56.png)
 
-- Try to use the hint as parameter
-- *http://natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8*
+- Try to use the hint as parameter: *http://natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8*
 - This reveals the password: **DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe**
 
 <br />
@@ -161,7 +161,8 @@ include "includes/secret.inc";
 
 #### Solution
 
-- Check out sourcecode:
+- Check out the sourcecode:
+
 ```
 <?
 
@@ -181,7 +182,7 @@ if(array_key_exists("submit", $_POST)) {
 ?>
 ```
 
-- This line must be reversed to encode the given $encodedSecret: `bin2hex(strrev(base64_encode($secret)))`
+- Following line must be reversed to encode the given $encodedSecret: `bin2hex(strrev(base64_encode($secret)))`
 - One can use following website for testing: [www.w3schools.com/PHP](https://www.w3schools.com/PHP/phptryit.asp?filename=tryphp_func_string_bin2hex)
 
 ```
@@ -194,7 +195,7 @@ echo($str);
 ?>
 ```
 
-- the calculated secret: **oubWYf2kBq**
+- The calculated secret: **oubWYf2kBq**
 - Password: **W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl**
 
 <br />
