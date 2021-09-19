@@ -358,10 +358,16 @@ if($data["showpassword"] == "yes") {
      - **bgcolor** (default: `#ffffff`)
 - The following happens when we refresh the website:
      1. The defaultdata from Cookie is loaded
-     2. The variable `$_REQUEST['bgcolor']`, which we entered in the mask, gets verified and saved inside the cookie:
+         - ` $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);`
+     3. The variable `$_REQUEST['bgcolor']`, which we entered in the mask, gets verified and saved inside the cookie:
          - `setcookie("data", base64_encode(xor_encrypt(json_encode($d))));`
 - We have to change the cookie-value of showpassword to **yes** in order to reveal the password
 - But we don't know the key nor its length to crack the XOR-encryption ... 
+- Well, we know what should stand there before the data gets XOR-encrypted or decrypted:
+     - `$d = array("showpassword" => "no", "bgcolor"=>"#ffffff");`
+     - Cookie value: `ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=`
+     - Base64_decode: `UK"H+O%pSWh]UZ-T%UhR^,^h`
+     - after json_encode: `{"showpassword":"no","bgcolor":"#ffffff"}`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/133932669-ca29d2fa-a5a3-4f8c-bc24-76b286728bca.png)
 
@@ -373,4 +379,4 @@ bgcolor | cookie
 #aaaaaa | ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**FlkrEBZZ**aAw%3D
 #bbbbbb | ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**FVooExVa**aAw%3D
 
-- It's obvious that only a small portion of the encrypted cookie gets changed. 
+- 
