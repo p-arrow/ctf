@@ -352,14 +352,20 @@ if($data["showpassword"] == "yes") {
 ?>
 ```
 
-- The website points out that Cookies are XOR encrypted
-- After reviweing the sourcecode, we can see that the Cookie contains two information:
+- The website points out that cookies are XOR encrypted
+- After reviewing the sourcecode, we can see the cookie contains two information:
      - **showpassword** (default: `no`)
      - **bgcolor** (default: `#ffffff`)
--  Following happens when we refresh the website:
-     1. defaultdata from Cookie is loaded
-     2. `$_REQUEST['bgcolor']`, which we entered in the mask, gets verified and saved inside the Cookie: `setcookie("data", base64_encode(xor_encrypt(json_encode($d))));`
-- We have to change the Cookie-value of showpassword to **yes** in order to reveal the password of Natas12
+- The following happens when we refresh the website:
+     1. The defaultdata from Cookie is loaded
+     2. The variable `$_REQUEST['bgcolor']`, which we entered in the mask, gets verified and saved inside the cookie:
+       `setcookie("data", base64_encode(xor_encrypt(json_encode($d))));`
+- We have to change the cookie-value of showpassword to **yes** in order to reveal the password of Natas12. But we don't have the key to crack the XOR-encryption ... 
 
 ![grafik](https://user-images.githubusercontent.com/84674087/133932669-ca29d2fa-a5a3-4f8c-bc24-76b286728bca.png)
 
+- Let's see how much the cookie value gets changed when we modify the bgcolor:
+    - #ffffff = ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**EV4sFxFe**aAw%3D
+    - #aaaaaa = ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**FlkrEBZZ**aAw%3D
+    - #bbbbbb = ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**FVooExVa**aAw%3D
+- It's obvious that only a small portion of the encrypted cookie gets changed. 
