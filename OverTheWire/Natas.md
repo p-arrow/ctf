@@ -253,3 +253,113 @@ if($key != "") {
 
 #### Solution
 
+- Sourcecode:
+
+```
+
+Output:
+<pre>
+<?
+$key = "";
+
+if(array_key_exists("needle", $_REQUEST)) {
+    $key = $_REQUEST["needle"];
+}
+
+if($key != "") {
+    if(preg_match('/[;|&]/',$key)) {
+        print "Input contains an illegal character!";
+    } else {
+        passthru("grep -i $key dictionary.txt");
+    }
+}
+?>
+</pre>
+```
+
+- Despite the existing **preg_match** filter regarding `; | &`, we can apply the same scheme as in Natas10
+
+![grafik](https://user-images.githubusercontent.com/84674087/133932002-2f1c3798-071d-4c9e-a726-8f8274f30bcb.png)
+
+- Password: **U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK**
+
+<br />
+
+## Natas11
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133932028-50261f64-df76-435f-a137-29c54cf1a7f3.png)
+
+#### Solution
+
+- Sourcecode:
+
+```
+<?
+
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in) {
+    $key = '<censored>';
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+function loadData($def) {
+    global $_COOKIE;
+    $mydata = $def;
+    if(array_key_exists("data", $_COOKIE)) {
+    $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);
+    if(is_array($tempdata) && array_key_exists("showpassword", $tempdata) && array_key_exists("bgcolor", $tempdata)) {
+        if (preg_match('/^#(?:[a-f\d]{6})$/i', $tempdata['bgcolor'])) {
+        $mydata['showpassword'] = $tempdata['showpassword'];
+        $mydata['bgcolor'] = $tempdata['bgcolor'];
+        }
+    }
+    }
+    return $mydata;
+}
+
+function saveData($d) {
+    setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+}
+
+$data = loadData($defaultdata);
+
+if(array_key_exists("bgcolor",$_REQUEST)) {
+    if (preg_match('/^#(?:[a-f\d]{6})$/i', $_REQUEST['bgcolor'])) {
+        $data['bgcolor'] = $_REQUEST['bgcolor'];
+    }
+}
+
+saveData($data);
+
+?>
+
+<?
+if($data["showpassword"] == "yes") {
+    print "The password for natas12 is <censored><br>";
+}
+
+?>
+```
+
+- The website points out that Cookies are XOR encrypted
+- After reviweing the sourcecode, we can see that the Cookie contains two information:
+     - **showpassword** (default: `no`)
+     - **bgcolor** (default: `#ffffff`)
+-  Following happens when we refresh the website:
+     1. defaultdata from Cookie is loaded
+     2. `$_REQUEST['bgcolor']`, which we entered in the mask, gets verified and saved inside the Cookie: `setcookie("data", base64_encode(xor_encrypt(json_encode($d))));`
+- We have to change the Cookie-value of showpassword to **yes** in order to reveal the password of Natas12
+
+![grafik](https://user-images.githubusercontent.com/84674087/133932669-ca29d2fa-a5a3-4f8c-bc24-76b286728bca.png)
+
