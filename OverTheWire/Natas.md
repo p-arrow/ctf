@@ -226,3 +226,30 @@ if($key != "") {
 ?>
 </pre>
 ```
+
+- As long as $key is not empty, our search term is passed to **passthru** and then **grep**
+- grep is searching inside dictionary.txt
+- If we enter `""`, all content is displayed
+
+![grafik](https://user-images.githubusercontent.com/84674087/133931581-e470f5db-708b-4c5b-9b8a-1d31dbedf08d.png)
+
+- Let's check if we can dump content from other directories: `"" /etc/passwd`
+
+![grafik](https://user-images.githubusercontent.com/84674087/133931617-9c6374f2-5d4e-4e61-8cc7-4c23aaf8e911.png)
+
+- Consequently, search at the password location: `"" /etc/natas_webpass/natas10`
+
+![grafik](https://user-images.githubusercontent.com/84674087/133931757-5a807dc7-b04b-4091-93b4-73fb5e3723ae.png)
+
+- Password: **nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu**
+
+<br />
+
+## Natas10
+
+#### Task
+
+![grafik](https://user-images.githubusercontent.com/84674087/133931772-07dbff54-422e-4554-96ec-7f76994141b8.png)
+
+#### Solution
+
