@@ -93,7 +93,7 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134001109-8fa34a36-229f-4c70-8a81-406d930c6c12.png)
 
-- Following above hint leads to this binary code:
+- Following the above hint leads to this binary code:
 ```
 01100010 01110101 01110010 01101110 01100010 01101100 01100001 01111010 01100101 
 01001100 01110000 00111001 01000101 01001101 00110010 00110111 01000111 01010010 
@@ -109,6 +109,7 @@
 
 #### Solution
 - Check sourcecode: `Control + U`
+
 ![grafik](https://user-images.githubusercontent.com/84674087/134001619-40da0133-4449-4fa8-8885-61264e4ee524.png)
 
 - This reveals a hidden email: *admin@defendtheweb.net*
