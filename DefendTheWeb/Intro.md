@@ -33,6 +33,7 @@
 - Check sourcecode: `Control + U`
 ![grafik](https://user-images.githubusercontent.com/84674087/133982073-364040b4-db6d-44e2-9a7f-740c039e50d8.png)
 
+- Enter: `https://defendtheweb.net/extras/playground/9d2K4Fw.json`
 - username: **thomas**, password: **S9234HKFnsd**
 
 <br />
@@ -56,4 +57,21 @@
 
 #### Solution
 
+- Right-Click on dropdown menu, then select "Inspect Element"
+
+![grafik](https://user-images.githubusercontent.com/84674087/133983269-ba10671d-bca1-4f07-92e0-dc138d42499e.png)
+
+- Change one username to "soft_member", press enter and select "soft_member" from the dropdown menu
+
+![grafik](https://user-images.githubusercontent.com/84674087/133983496-85542a8c-08d1-413d-b40a-d77d18109128.png)
+
+- Success!
+
+<br />
+
+## Intro7
+
+![grafik](https://user-images.githubusercontent.com/84674087/133983571-78e58627-8c69-4f0a-88ba-62bb353d39b1.png)
+
+#### Solution
 
