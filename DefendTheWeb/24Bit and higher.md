@@ -77,3 +77,182 @@ string_rev = string[::-1]
 
 > Hello, welcome to the crypt levels on hackthis. These levels are all about decryption and logic, you will need to employ a lot of brain 
 power. To complete this level enter this pass: woocrypt
+
+
+<br />
+
+## Beach
+
+![grafik](https://user-images.githubusercontent.com/84674087/134034816-cb5cd201-d135-4ec7-bf9f-fb0398fa730b.png)
+
+#### Solution
+- We download the picture b4.jpeg and investigate it with exiftool
+- In case you miss it on your Kali machine: `apt install libimage-exiftool-perl`
+- Then `exiftool b4.jpeg` and we get a bunch of information. An extract:
+
+![grafik](https://user-images.githubusercontent.com/84674087/134039920-b943f978-b082-40d7-8eb0-54efc06ca571.png)
+
+
+- The two most interesting information hereof are: 
+    - user: **james** 
+    - user comment: **I like chocolate**
+- Well, now it's time to be creative ... after some attempts we simply try:
+    - user: **james** 
+    - password: **chocolate**
+- Success!
+
+<br />
+
+## Intro3 / Javascript
+
+![grafik](https://user-images.githubusercontent.com/84674087/134040350-f442fe4d-49fe-49a2-89fc-9c44eed43606.png)
+
+#### Solution
+- Check sourcode: `Control + U`
+- We find below code snippet on line 36:
+
+`<script type='text/javascript'> $(function(){ $('.level form').submit(function(e){ e.preventDefault(); if(document.getElementById('password').value == correct) { document.location = '?pass=' + correct; } else { alert('Incorrect password') } })})</script>`
+
+- We recognize that the function compares the entered password with the variable **correct**
+- Is this variable maybe hardcoded somewhere inside the website/sourcecode? Let's search with `Control + F`
+
+![grafik](https://user-images.githubusercontent.com/84674087/134044546-d20d141b-2825-4e65-9377-817a9cc65a5e.png)
+
+- password: **e0c00ddec3**
+
+<br />
+
+## Squashed image / Stego
+
+![grafik](https://user-images.githubusercontent.com/84674087/134044679-3a62b1d5-db2f-4c7f-8701-9f4873340b7e.png)
+
+#### Solution
+- Considering the title of this game - Stego - the picture probably contains hidden information
+- First, we start with **exiftool**, but it no interesting information at the first glance
+- So, let's try **steghide**: `steghide extract -sf b5.jpg`
+
+![grafik](https://user-images.githubusercontent.com/84674087/134047514-485db8d4-1bb1-4232-b3be-7493e418b2bc.png)
+
+- How about **binwalk** which can also extract hidden data: `binwalk b5.jpg`
+
+![grafik](https://user-images.githubusercontent.com/84674087/134047623-4a5e0a94-506d-493c-a5a3-a57bb03811ba.png)
+
+- The image b5 seems to be zipped together with secret.txt
+- `unzip b5.jpg`
+- `cat secret.txt`
+- user: **admin** , password: **safe** 
+
+<br />
+
+## Library Gateway / Realistic
+
+![grafik](https://user-images.githubusercontent.com/84674087/134048474-644117ac-aab2-4c4c-a3e5-b288a4f571dc.png)
+
+#### Solution
+- We follow the link to Library Gateway and reach a login.php site:
+
+![grafik](https://user-images.githubusercontent.com/84674087/134048683-773196cb-2de7-469f-824d-f95ada8c1236.png)
+
+- We take a look at the sourcecode and find a hint regarding member directory
+```
+function loadimage()
+			{
+				var username= document.getElementById('username').value;
+				var password= document.getElementById('password').value;
+            
+				URL= "members/" + username + " " + password + ".htm";      <<---- this line (!)
+            
+				path = URL;
+				document.getElementById("status").innerHTML = 'Checking details...';
+
+				req = getreq();
+				req.onreadystatechange = exists;
+				req.open("get", path, true);
+				req.send(null);     
+			}
+```
+
+- We enter: **https://defendtheweb.net/extras/playground/real/2/members/**
+
+![grafik](https://user-images.githubusercontent.com/84674087/134051083-5ee9eab9-68fa-4b87-9256-5c879a57c880.png)
+
+- Then we simply test each user name and password one by one until we find the correct pair
+- user: **librarian** , **sweetlittlebooks**
+
+<br />
+
+## HTTP method / Intro
+
+![grafik](https://user-images.githubusercontent.com/84674087/134051998-fd93b506-8410-4760-83f2-b1e6a2994182.png)
+
+#### Solution
+- In the first place, we try to send a POST request by using Burp
+
+![grafik](https://user-images.githubusercontent.com/84674087/134057291-25608174-4be4-4fa1-a173-feb5ae99962b.png)
+
+- However, no reaction ... even when changing the input style to `password:d612765f63` or attaching the password as parameter to the URL
+- Another attempt is Basic HTTP Authentication: [developer.mozilla.org/HTTP/Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+```
+POST /playground/http-method HTTP/2
+...
+...
+
+Authorization Basic d612765f63
+```
+
+- This didn't help either
+- So, why don't we check the sourcecode again ...
+
+![grafik](https://user-images.githubusercontent.com/84674087/134056972-89920fd0-84f8-4089-a0fc-753419011408.png)
+
+- It seems we have to input some HTML code by ourselves in order to enter the password in a form
+- Let's copy the needed HTML code from another/previous game. Then simply remove the username part and add your specific token value:
+
+```
+<form class="form--intro-1" method="post" enctype="multipart/form-data">
+
+       <div class="input input--hidden " data-group="token">
+         <input type="hidden" name="token" id="token" value="enterYourValueHere" maxlength="" placeholder="" class="u-full-width" />
+       </div>
+         
+       <div class="input input--hidden " data-group="formid">
+         <input type="hidden" name="formid" id="formid" value="enterYourValueHere" maxlength="" placeholder="" class="u-full-width" />
+       </div>
+                          
+       <div class="input input--password " data-group="password">
+         <label for="password">Password</label>                            
+         <input type="password" name="password" id="password" value="" maxlength="" placeholder="" class="u-full-width" />
+       </div>
+      
+       <button type="submit" class="button button--main right">Log in</button>
+</form>
+```
+
+- Then the website looks like this and we can proceed by using the given password
+
+- ![grafik](https://user-images.githubusercontent.com/84674087/134059264-7f5cf3e2-e5dd-410c-a85b-a2aa43bcab05.png)
+
+<br />
+
+## Crypt2/Crypt
+
+![grafik](https://user-images.githubusercontent.com/84674087/134059760-880e4ffd-496f-4ff6-8642-d15a888f1788.png)
+
+#### Solution
+- Encrypted text: 
+```
+Aipgsqi fego, xlmw pizip mw rsx ew iewc ew xli pewx fyx wxmpp rsx xss gleppirkmrk. Ws ks elieh erh irxiv xlmw teww: wlmjxxlexpixxiv
+```
+
+- The first try to decode this text was ROT13: `echo "TEXT" | tr a-zA-Z n-za-mN-ZA-M` 
+- This did not work out ... 
+- Then, by looking at the text we can guess some words. The last word **wlmjxxlexpixxiv** could be the password. If so, the word **teww** could stand for "pass"
+- To verify our assumption we use this site for frequency analysis: [math.dartmouth.edu](https://math.dartmouth.edu/~awilson/tools/frequency_analysis.html)
+- We start with our guess (teww = pass) and decode other letters step by step
+- Then we finally catch the password: **shiftthatletter**
+
+<br />
+
+## Sid / Intro
+
+#### Solution
