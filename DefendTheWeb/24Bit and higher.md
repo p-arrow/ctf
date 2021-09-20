@@ -205,8 +205,9 @@ Authorization Basic d612765f63
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134056972-89920fd0-84f8-4089-a0fc-753419011408.png)
 
-- It seems we have to input some HTML code by ourselves in order to enter the password in a form
-- Let's copy the needed HTML code from another/previous game. Then simply remove the username part and add your specific token value:
+- It seems we have to input some HTML code by ourselves in order to enter the password inside a form
+- Let's copy the needed HTML code from another/previous game
+- Then simply remove the username section and add your specific token value
 
 ```
 <form class="form--intro-1" method="post" enctype="multipart/form-data">
@@ -228,7 +229,7 @@ Authorization Basic d612765f63
 </form>
 ```
 
-- Then the website looks like this and we can proceed by using the given password
+- Then the website looks like below and we can proceed by using the given password
 
 - ![grafik](https://user-images.githubusercontent.com/84674087/134059264-7f5cf3e2-e5dd-410c-a85b-a2aa43bcab05.png)
 
@@ -245,8 +246,8 @@ Aipgsqi fego, xlmw pizip mw rsx ew iewc ew xli pewx fyx wxmpp rsx xss gleppirkmr
 ```
 
 - The first try to decode this text was ROT13: `echo "TEXT" | tr a-zA-Z n-za-mN-ZA-M` 
-- This did not work out ... 
-- Then, by looking at the text we can guess some words. The last word **wlmjxxlexpixxiv** could be the password. If so, the word **teww** could stand for "pass"
+- But this did not work out ... 
+- Then, by looking at the text we could guess some words. The last word **wlmjxxlexpixxiv** could be the password. If so, the word **teww** could stand for "pass"
 - To verify our assumption we use this site for frequency analysis: [math.dartmouth.edu](https://math.dartmouth.edu/~awilson/tools/frequency_analysis.html)
 - We start with our guess (teww = pass) and decode other letters step by step
 - Then we finally catch the password: **shiftthatletter**
