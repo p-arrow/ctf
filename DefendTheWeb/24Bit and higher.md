@@ -231,7 +231,7 @@ Authorization Basic d612765f63
 
 - Then the website looks like below and we can proceed by using the given password
 
-- ![grafik](https://user-images.githubusercontent.com/84674087/134059264-7f5cf3e2-e5dd-410c-a85b-a2aa43bcab05.png)
+![grafik](https://user-images.githubusercontent.com/84674087/134059264-7f5cf3e2-e5dd-410c-a85b-a2aa43bcab05.png)
 
 <br />
 
