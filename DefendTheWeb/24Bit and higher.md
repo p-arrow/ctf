@@ -197,7 +197,7 @@ POST /playground/http-method HTTP/2
 ...
 ...
 
-Authorization Basic d612765f63
+Authorization: Basic d612765f63
 ```
 
 - This didn't help either
