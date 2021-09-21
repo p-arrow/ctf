@@ -258,13 +258,15 @@ Aipgsqi fego, xlmw pizip mw rsx ew iewc ew xli pewx fyx wxmpp rsx xss gleppirkmr
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134189910-2fccacec-840f-4538-a491-a863deb3e67e.png)
 
+- When we click on enter:
+
 ![grafik](https://user-images.githubusercontent.com/84674087/134190013-6773ca3d-4a2f-4452-ac9b-866127c6d2ab.png)
 
 #### Solution
 
 - Open DevTool: `Control + Shift + E`
 - Go to storage and find four cookies, wherein only one is related to this game: *i3_access = false*
-- Change the value to *true* et voilà
+- Change the value to **true** et voilà
 
 <br />
 
@@ -287,15 +289,16 @@ Aipgsqi fego, xlmw pizip mw rsx ew iewc ew xli pewx fyx wxmpp rsx xss gleppirkmr
 ```
 
 - We can recognize the hardcoded password **code123** and use it to enter the next level ... but we fail !
-- Let's try to rewrite the code: Instead of `document.thecode = 'code123'` we could write `var thecode = 'code123'` ... but this doesn't work either
-- Then, why not delete the whole part `document.thecode = 'code123'` and implement 'code123' directly into the script? 
-	- Means, `if(document.getElementById('password').value == code123`
+- Let's try to rewrite the code: Instead of `document.thecode = 'code123'` we could write `var thecode = 'code123'` ... but the password code123 still doesn't work
+- Then, why don't we delete the whole part `document.thecode = 'code123'` and implement 'code123' directly? 
+	- Means, for instance, `if(document.getElementById('password').value == code123`
 	- Still no success !
 - Maybe 'code123' is just not the right answer
-- We start the search engine `Control + F` and enter "thecode": 4 hits ! The last hit reveals new information:
+- We start the search engine `Control + F` and enter "thecode": 4 hits ! The last hit reveals new information at the end of the sourcecode:
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134198815-3ed975ef-13fe-48f1-878f-12d8d3db31f4.png)
 
+- No matter what we change at the beginning of the sourcecode, "thecode" gets overwritten in the final end ...
 - We translate the hexcode into ASCII and get this phrase: **c221802f20**
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134201166-f613eeb3-cd36-4eba-be3c-520083e2828f.png)
