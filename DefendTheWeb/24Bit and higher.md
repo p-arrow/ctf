@@ -245,7 +245,7 @@ Authorization: Basic d612765f63
 Aipgsqi fego, xlmw pizip mw rsx ew iewc ew xli pewx fyx wxmpp rsx xss gleppirkmrk. Ws ks elieh erh irxiv xlmw teww: wlmjxxlexpixxiv
 ```
 
-- The first try to decode this text was ROT13: `echo "TEXT" | tr a-zA-Z n-za-mN-ZA-M` 
+- The first try to decode this text was based on ROT13: `echo "TEXT" | tr a-zA-Z n-za-mN-ZA-M` 
 - But this did not work out ... 
 - Then, by looking at the text we could guess some words. The last word **wlmjxxlexpixxiv** could be the password. If so, the word **teww** could stand for "pass"
 - To verify our assumption we use this site for frequency analysis: [math.dartmouth.edu](https://math.dartmouth.edu/~awilson/tools/frequency_analysis.html)
@@ -256,4 +256,54 @@ Aipgsqi fego, xlmw pizip mw rsx ew iewc ew xli pewx fyx wxmpp rsx xss gleppirkmr
 
 ## Sid / Intro
 
+![grafik](https://user-images.githubusercontent.com/84674087/134189910-2fccacec-840f-4538-a491-a863deb3e67e.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/134190013-6773ca3d-4a2f-4452-ac9b-866127c6d2ab.png)
+
 #### Solution
+
+- Open DevTool: `Control + Shift + E`
+- Go to storage and find four cookies, wherein only one is related to this game: *i3_access = false*
+- Change the value to *true* et voilà
+
+<br />
+
+## Intro 10 / Javascript
+
+![grafik](https://user-images.githubusercontent.com/84674087/134190677-fe1e497a-245a-4115-a9c5-3ebd156a8b78.png)
+
+#### Solution
+- Check sourcode: `Control + U`
+- We find below code snippet on line 36:
+
+```
+<script type='text/javascript'> 
+	document.thecode = 'code123';
+	$(function(){ $('.level form').submit(function(e){ e.preventDefault();
+		if(document.getElementById('password').value == document.thecode) 
+			{ document.location = '?pass=' + document.thecode; } 
+		else { alert('Incorrect password') } })});
+</script>
+```
+
+- We can recognize the hardcoded password **code123** and use it to enter the next level ... but we fail !
+- Let's try to rewrite the code: Instead of `document.thecode = 'code123'` we could write `var thecode = 'code123'` ... but this doesn't work either
+- Then, why not delete the whole part `document.thecode = 'code123'` and implement 'code123' directly into the script? 
+	- Means, `if(document.getElementById('password').value == code123`
+	- Still no success !
+- Maybe 'code123' is just not the right answer
+- We start the search engine `Control + F` and enter "thecode": 4 hits ! The last hit reveals new information:
+
+![grafik](https://user-images.githubusercontent.com/84674087/134198815-3ed975ef-13fe-48f1-878f-12d8d3db31f4.png)
+
+- We translate the hexcode into ASCII and get this phrase: **c221802f20**
+
+![grafik](https://user-images.githubusercontent.com/84674087/134201166-f613eeb3-cd36-4eba-be3c-520083e2828f.png)
+
+- This is the correct password because we can enter the next game !
+
+**ALTERNATIVE**
+- Open DevTool: `Control + Shift + E`
+- Go to Console, enter `document.thecode`
+
+![grafik](https://user-images.githubusercontent.com/84674087/134201040-7d3667b3-411c-44f4-a82d-cde5150e8983.png)
