@@ -39,5 +39,5 @@
 - We play around and enter specific values: `?input=123` , `?input=kgjgfkjhkjhk` etc.
 - Nothing happens
 - When we remove the parameter and reload the page, the parameter simply returns
-
+- Additionally, whatever we enter after "?input", it remains in the URL even after reloading the page
 
