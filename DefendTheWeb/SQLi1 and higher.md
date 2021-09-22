@@ -74,7 +74,7 @@
 ![grafik](https://user-images.githubusercontent.com/84674087/134406650-b73f1a77-c712-442b-81cb-5cf85232e6d3.png)
 
 - The hosting company is disclosed as follows: `host 3.10.42.19`
-- It is Amazon (AWS)
+- It is **Amazon** (AWS)
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134406913-41aad135-2d0e-4634-a7c1-c3b119b8da0d.png)
 
