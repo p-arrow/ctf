@@ -35,16 +35,16 @@
 #### Solution
 
 - Puhhh ! Nothing special to find in the sourcecode. No hidden password, no suspicious JS script ... 
-- After a while, we recognize a search parameter in the URL: https://defendtheweb.net/playground/intro11/ **?input**
+- After a while, we recognize the search parameter **?input** in the URL: https://defendtheweb.net/playground/intro11/?input
 - We play around and enter specific values: `?input=123` , `?input=kgjgfkjhkjhk` etc.
 - Nothing happens
 - When we remove the parameter and reload the page, the parameter simply returns
 - Additionally, whatever we enter after "?input", it remains in the URL even after reloading the page
-- While having the Debugger open, we notice that `?input + any other content` prevents the loading of the playground:
+- DevTool: While having the Debugger open, we notice that `?input + any other content` like `?input==` prevents the loading of the playground:
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134385289-a62d1850-aad1-4e78-8f4b-14fe1206fa64.png)
 
-- As soon as we remove one char from `?input` or remove it completely, the playground gets loaded:
+- As soon as we remove one char from `?input`, as `?in`, or remove it completely the playground gets loaded:
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134385391-b0e6d445-4f8e-49f5-a486-9bb0879a1f9c.png)
 
@@ -53,9 +53,9 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134383707-c64e9aca-a71e-470b-8f96-b6e1839cb89e.png)
 
-- That is, some thoughts later we coincidentally replace `intro11?input` by `intro11#`
-- The # pretends that everything followed after that is NOT sent to the server
-- We send the # and check the sourcecode with Debugger et voilà - look at line 473 !
+- That is, some thoughts later we experimentally replace `intro11?input` by `intro11#`
+- The # pretends that everything followed after that is NOT sent to the server (as if we remove `?input` entirely)
+- We send  # and check the sourcecode with Debugger et voilà - look at line 473 !
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134394228-d17b906d-08f2-4da7-8991-825c7e3d3dc1.png)
 
