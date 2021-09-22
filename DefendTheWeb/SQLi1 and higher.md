@@ -65,3 +65,21 @@
 
 ## Recon
 
+![grafik](https://user-images.githubusercontent.com/84674087/134402400-800d26ed-da93-44b5-b78f-fbd35099a71a.png)
+
+#### Solution
+- The IP address can be found here:
+
+![grafik](https://user-images.githubusercontent.com/84674087/134406650-b73f1a77-c712-442b-81cb-5cf85232e6d3.png)
+
+- The hosting computer is disclosed as follows: `host 3.10.42.19`
+- It is Amazon (AWS)
+
+![grafik](https://user-images.githubusercontent.com/84674087/134406913-41aad135-2d0e-4634-a7c1-c3b119b8da0d.png)
+
+- The B6-Key Header is a bit tricky because it is not common among internet users
+- After a quick search on Google we find the hint that this header is related to email headers
+
+
+![grafik](https://user-images.githubusercontent.com/84674087/134406071-fcb6c4ab-fe07-4fda-b8b0-a06595a63866.png)
+
