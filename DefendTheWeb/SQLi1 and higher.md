@@ -84,4 +84,43 @@
 - There are several ways leading to Rome: Password-Recovery-Function, getting private message from another user, getting a notification of new thread posts etc.
 
 
+...
+
+<br />
+
+## Crypt 4 / Crypt
+
+![grafik](https://user-images.githubusercontent.com/84674087/134478883-974b26f8-b744-4900-b23e-748e53ff8876.png)
+
+#### Solution
+```
+ Dc, gdcl cl h lcrcshn ckqh gz sqwqs guz. Gdcl gcrq qhyd sqggqn cl hllcomqk h ljqycacqk nqshgczmldcj ucgd hmzgdqn sqggqn. Jhll: cdhwqancqmkl
+```
+
+- We use this handy frequency analysis tool: [https://math.dartmouth.edu/](https://math.dartmouth.edu/~awilson/tools/frequency_analysis.html)
+- After playing around with the letters we produce below result:
+
+```
+ hi, this is a similar idea to level two. this time each letter is assigned a specified relationship with another letter. pass: ihavefriends
+```
+
+- password: **ihavefriends**
+
+<br />
+
+## Map it
+
+#### Solution
+
+<br />
+
+## Crypt 5 / Crypt
+
+![grafik](https://user-images.githubusercontent.com/84674087/134480226-ec945b9f-ebb2-4408-9141-b39e04cc1b66.png)
+
+#### Solution
+```
+qoymlNlpY :ccdf lpy yzJ .qoh ln lxigqoh qlxlm eeiw zot ydpy gmipylnoC ,zot gmiyqdncyzo ho ydpy ci lniqk tN .lsie sooe tlpy ydpw yom ,smipy amd tdc tlpy ydpw tj lefolf gmigazb ho ydpy ci lniqk tN .tyicoiqzk ho ydpy ci lniqk tN .edminiqk d nd i clT
+```
+
 
