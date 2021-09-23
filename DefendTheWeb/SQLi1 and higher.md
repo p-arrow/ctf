@@ -123,4 +123,16 @@
 qoymlNlpY :ccdf lpy yzJ .qoh ln lxigqoh qlxlm eeiw zot ydpy gmipylnoC ,zot gmiyqdncyzo ho ydpy ci lniqk tN .lsie sooe tlpy ydpw yom ,smipy amd tdc tlpy ydpw tj lefolf gmigazb ho ydpy ci lniqk tN .tyicoiqzk ho ydpy ci lniqk tN .edminiqk d nd i clT
 ```
 
+- It took me a while, until I noticed that the letters are not only replaced but the whole text is reversed !
+- Look here: `qoymlNlpY :ccdf` ... this is actually the end of the text and should look like `fdcc: YplNlmyoq`
+- So, `fdcc:` is most probably `pass:`
+- From there you will decode the text step by step and reach to the solution:
+
+```
+rotnemeht :ssap eht tub .rof em evigrof reven lliw uoy taht gnihtemos ,uoy gnitramstuo fo taht si emirc ym .ekil kool yeht tahw ton ,kniht dna yas yeht tahw yb elpoep gnigduj fo taht si emirc ym .ytisoiruc fo taht si emirc ym .lanimirc a ma i sey
+```
+
+- password: **thementor**
+
+<br />
 
