@@ -124,7 +124,9 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134686852-1e610e42-1975-4e9c-85f4-9fb01fa69d04.png)
 
-- 
+- Version verification: `nmap -p8000 -sV 3.10.42.19`
+![grafik](https://user-images.githubusercontent.com/84674087/134699425-d06b0e31-dc14-4bef-8ab5-9735d4971c58.png)
+
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134677976-b632bb58-9d3a-45cc-9ef7-d8b3e1f040a5.png)
 
