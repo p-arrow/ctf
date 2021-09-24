@@ -112,7 +112,25 @@
 
 ## Map it
 
+![grafik](https://user-images.githubusercontent.com/84674087/134675088-1d0af628-5bbc-49ab-aeb4-9cef9e7738f7.png)
+
 #### Solution
+- "Map it" ... nmap it?
+- Let's check out all ports: `nmap -p- -sV 3.10.42.19`
+
+![grafik](https://user-images.githubusercontent.com/84674087/134685817-dfd2f49f-7b6b-4d14-814e-da8cbb12011f.png)
+
+- The option `-F` speeds up the nmap scan and investigate only the first 100 ports. However, when I use `nmap -F 3.10.42.19` I get following output:
+
+![grafik](https://user-images.githubusercontent.com/84674087/134686852-1e610e42-1975-4e9c-85f4-9fb01fa69d04.png)
+
+- 
+
+![grafik](https://user-images.githubusercontent.com/84674087/134677976-b632bb58-9d3a-45cc-9ef7-d8b3e1f040a5.png)
+
+
+
+
 
 <br />
 
@@ -138,7 +156,3 @@ rotnemeht :ssap eht tub .rof em evigrof reven lliw uoy taht gnihtemos ,uoy gnitr
 - password: **thementor**
 
 <br />
-
-## Map It
-
-#### Solution
