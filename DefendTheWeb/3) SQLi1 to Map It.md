@@ -78,13 +78,15 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134406913-41aad135-2d0e-4634-a7c1-c3b119b8da0d.png)
 
-- The B6-Key Header is a bit tricky because it is not common among internet users
-- After a quick search on Google we find the hint that this header is related to email headers
-- It must be an email that we receive from defendtheweb
-- There are several ways leading to Rome: Password-Recovery-Function, getting private message from another user, getting a notification of new thread posts etc.
+- The B6-Key Header ... never heard about B6? Me neither
+- After a quick search on Google we find the hint that this header is related to email headers. Actually, most hits point me back to defendtheweb forum posts
+- Everbodysays: Look at the email! The email you receive(d) from defendtheweb ...and this is where I lost at least one hour because these advices are several years old and not valid anymore
+- Luckily I figured out that everything we need is our WebDevTool: `Control + Shift + E`
 
+![grafik](https://user-images.githubusercontent.com/84674087/134650671-b2e228a2-c7fd-4c6f-bb66-eb6ae0c103f4.png)
 
-...
+- B6-key: **goobles**
+
 
 <br />
 
@@ -126,7 +128,8 @@ qoymlNlpY :ccdf lpy yzJ .qoh ln lxigqoh qlxlm eeiw zot ydpy gmipylnoC ,zot gmiyq
 - It took me a while, until I noticed that the letters are not only replaced but the whole text is reversed !
 - Look here: `qoymlNlpY :ccdf` ... this is actually the end of the text and should look like `fdcc: YplNlmyoq`
 - So, `fdcc:` is most probably `pass:`
-- From there you will decode the text step by step and reach to the solution:
+- From there you will decode the text step by step and reach to the solution
+- Tools: [https://math.dartmouth.edu/](https://math.dartmouth.edu/~awilson/tools/frequency_analysis.html), [https://www3.nd.edu/](https://www3.nd.edu/~busiforc/handouts/cryptography/cryptography%20hints.html)
 
 ```
 rotnemeht :ssap eht tub .rof em evigrof reven lliw uoy taht gnihtemos ,uoy gnitramstuo fo taht si emirc ym .ekil kool yeht tahw ton ,kniht dna yas yeht tahw yb elpoep gnigduj fo taht si emirc ym .ytisoiruc fo taht si emirc ym .lanimirc a ma i sey
@@ -136,3 +139,6 @@ rotnemeht :ssap eht tub .rof em evigrof reven lliw uoy taht gnihtemos ,uoy gnitr
 
 <br />
 
+## Map It
+
+#### Solution
