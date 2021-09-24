@@ -68,20 +68,20 @@
 ![grafik](https://user-images.githubusercontent.com/84674087/134402400-800d26ed-da93-44b5-b78f-fbd35099a71a.png)
 
 #### Solution
-- The IP address can be found here:
+- The IP address can be found for instance with WebDevTool: `Control + Shift + E`
 - **3.10.42.19**
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134406650-b73f1a77-c712-442b-81cb-5cf85232e6d3.png)
 
-- The hosting company is disclosed as follows: `host 3.10.42.19`
+- The hosting company can be disclosed like this: `host 3.10.42.19`
 - It is **Amazon** (AWS)
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134406913-41aad135-2d0e-4634-a7c1-c3b119b8da0d.png)
 
 - The B6-Key Header ... never heard about B6? Me neither
-- After a quick search on Google we find the hint that this header is related to email headers. Actually, most hits point me back to defendtheweb forum posts
-- Everbodysays: Look at the email! The email you receive(d) from defendtheweb ...and this is where I lost at least one hour because these advices are several years old and not valid anymore
-- Luckily I figured out that everything we need is our WebDevTool: `Control + Shift + E`
+- After a quick search on Google we learn that this header is related to email headers. Actually, most Defendtheweb forum posts state that
+- Everbody says: Look at the email!! The email you receive(d) from Defendtheweb ...and this is where I lost at least one hour because these advices are outdated not valid anymore
+- Luckily, I figured out that everything we need is our WebDevTool: `Control + Shift + E`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134650671-b2e228a2-c7fd-4c6f-bb66-eb6ae0c103f4.png)
 
