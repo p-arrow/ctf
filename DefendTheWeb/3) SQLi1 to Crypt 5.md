@@ -3,13 +3,16 @@
 ![grafik](https://user-images.githubusercontent.com/84674087/134203849-9545248b-3071-4645-8aef-0f189a4da224.png)
 
 #### Solution
+- We enter `'` inside the username field and get below query information:
 
-- We enter a typical SQL injection inside the username field: `' or '1'='1`
+![grafik](https://user-images.githubusercontent.com/84674087/134769313-b4d6bdeb-09ee-43f9-95cb-46e4f0d757ac.png)
+
+- We utilize this hint by entering a typical SQL injection inside the username field: `' or '1'='1`
 - We get "Invalid login details"
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134204439-0004d1d9-f866-4852-82b6-9d66e4c49936.png)
 
-- Then we enter the same code in both fields: Success !
+- Then we enter the same SQL injection in both fields: Success !
 
 <br />
 
