@@ -16,3 +16,4 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134702341-cbeb29aa-9e7c-4116-a73e-1e5f4e86edfd.png)
 
+- The database displays all usernames and admin when we enter for example this command: `' or 1=1 AND password = ' ' or 1=1--`
