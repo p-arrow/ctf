@@ -123,19 +123,22 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134685817-dfd2f49f-7b6b-4d14-814e-da8cbb12011f.png)
 
-- The option `-F` speeds up the nmap scan and investigate only the first 100 ports. However, when I use `nmap -F 3.10.42.19` I get following output:
+- The option `-F` speeds up the nmap scan and investigates only the most common 100 ports. However, when I use `nmap -F 3.10.42.19` I get following output:
 
-![grafik](https://user-images.githubusercontent.com/84674087/134686852-1e610e42-1975-4e9c-85f4-9fb01fa69d04.png)
+![grafik](https://user-images.githubusercontent.com/84674087/135122900-a12061c6-5991-443c-8967-c6d03fe1bfdf.png)
 
-- Version verification: `nmap -p8000 -sV 3.10.42.19`
-![grafik](https://user-images.githubusercontent.com/84674087/134699425-d06b0e31-dc14-4bef-8ab5-9735d4971c58.png)
+- So, I find other ports, which I did not discover when scanning all ports. Mysterious ...
+- I figured out - after reading some DtW forum posts - that several nmap scans seem necessary to reveal most/all services running
+- Let me sum up the ports which I discovered after several scans:
 
-
-![grafik](https://user-images.githubusercontent.com/84674087/134677976-b632bb58-9d3a-45cc-9ef7-d8b3e1f040a5.png)
-
-
-
-
+Port | Service
+---- | ------- 
+22 | SSH
+25 | SMTP
+80 | HTTP
+443 | HTTPS
+8000 | HTTP Alternative (Go Web Server)
+9100 | Jetdirect (HP printer service)
 
 <br />
 
