@@ -66,9 +66,13 @@
 #### Solution
 - Website:
 
+![grafik](https://user-images.githubusercontent.com/84674087/135170965-08818cc6-e723-476b-824d-aa5bf18c47b0.png)
+
 - We click around and get finally to the submit-page where we can enter our own wish letter
 - While checking the source code of this site we notice the href `mod.php`:
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135169670-fd189fa0-2c4c-41a4-a0f5-d15d1b76dda5.png)
 
 - We follow the link and get to a login page. How dare you ;)
+
+![grafik](https://user-images.githubusercontent.com/84674087/135170918-3864a256-8853-4e11-9cf3-982536a271b9.png)
