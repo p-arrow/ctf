@@ -55,3 +55,20 @@
 ![grafik](https://user-images.githubusercontent.com/84674087/135161578-c44a7764-63cf-4bf8-a400-ca072aa707cd.png)
 
 - password: **544e14708b**
+
+
+<br />
+
+## Xmas '08 / Realistic
+
+![grafik](https://user-images.githubusercontent.com/84674087/135165137-ec93ffef-3b4c-4a23-a82b-403955a88440.png)
+
+#### Solution
+- Website:
+
+- We click around and get finally to the submit-page where we can enter our own wish letter
+- While checking the source code of this site we notice the href `mod.php`:
+
+![grafik](https://user-images.githubusercontent.com/84674087/135169670-fd189fa0-2c4c-41a4-a0f5-d15d1b76dda5.png)
+
+- We follow the link and get to a login page. How dare you ;)
