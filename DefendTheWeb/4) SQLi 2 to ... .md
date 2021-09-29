@@ -40,7 +40,7 @@
    - I use the same table "members" but query different columns:
       -  **username, admin VS password, admin**
       -  The output is not handy and clear, but we realize that admins are displayed, but when there is no corresponding username, the password is shown instead
-      -  More precisely: The SHA1 Hash
+      -  More precisely: The SHA1 Hash (for bellamond: `1b774bc166f3f8918e900fcef8752817bae76a37`)
       -  This can be figured out here: [hash_identifier](https://hashes.com/en/tools/hash_identifier)
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135313488-d88ff0dd-90cb-493d-8abf-03e1099e4888.png)
