@@ -178,3 +178,18 @@ monkey
    -  Revoked.Mayhem -> **password: westwoodworld**
    -  John -> **password: gymsoft**
    -  Gizmo -> **password: evisumake**
+
+- Now we try to logon to email_beta as nemisis, however, it doesn't work even ... after several attempts ... 
+- Reminder: There is a password recovery service at Safe Transfer
+- There we enter nemisis and jfelliot@mail.com - this works ! 
+
+![grafik](https://user-images.githubusercontent.com/84674087/135525139-58ef7200-7dcb-4bf8-9abf-9034183511de.png)
+
+- So, the mail address must be correct ...  is there something wrong with the username ?!
+- I got a clue after several minutes passed : Maybe jfelliot is the username for email_beta ?
+- In the inbox we find the new **password** details: **i.am.awesome**
+
+![grafik](https://user-images.githubusercontent.com/84674087/135524922-25b59d39-399d-4cf9-bc97-c69a82e6df3a.png)
+
+- We go back to Safe Transfer and login as nemisis
+- Final step is to transfer the amount of £1.32 back to the account no. 64957746 (Revoked.Mayhem)
