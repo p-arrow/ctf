@@ -148,8 +148,11 @@ monkey
 ![grafik](https://user-images.githubusercontent.com/84674087/135508144-f842ab57-f29f-4c2f-83dc-3288f412439a.png)
 
 - We succeed with password **letmein** !
+- Now we have access to member DB and bids DB
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135508509-c41327c2-1479-4362-ad70-95f28f9933e8.png)
+
+- We obtain valuable information from member DB:
 
 \# | User | Email
 --| ---- | -----
@@ -160,16 +163,16 @@ monkey
 31 | Revoked.Mayhem | Caffe@hotbiz.com
 36 | admin | hellomum@yawn.go
 
-- At bids overview we discover the **"Opponent"** who made the deal with Revoked.Mayhem: It is **nemisis** !
+- At bids DB we can discover the **"Opponent"** who made the deal with Revoked.Mayhem: It is **nemisis** !
 - So, Revoked.Mayhem goes crazy because of £1.32 ?! 😄
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135510187-f533c82c-fff2-42fb-9995-5d6af8579503.png)
 
 - But how can we retrieve the password of any user, especially nemesis ?
-- We look at the URL of member dbs/SQL query: `https://defendtheweb.net/extras/playground/planetbid/planetbid/view.php?members&1=user&2=email`
-- Let's modify it a bit ... `https://defendtheweb.net/extras/playground/planetbid/planetbid/view.php?members&1=user&2=password` ... empty column 😒
-- How about: `https://defendtheweb.net/extras/playground/planetbid/planetbid/view.php?members&1=user&2=pass` ... Success ! Hashes ! MD5 Hashes !
+- We look at the URL of member dbs/SQL query: `/planetbid/view.php?members&1=user&2=email`
+- Let's modify it a bit ... `/planetbid/view.php?members&1=user&2=password` ... we get an empty column 😒
+- How about: `/planetbid/view.php?members&1=user&2=pass` ... Success ! Hashes ! MD5 Hashes !
     - Check out here: [hash_identifier](https://hashes.com/en/tools/hash_identifier) 
-- `hashcat -m 0 -a 0 hash.txt /usr/share/john/password.lst` (hash.txt contains the hash of nemesis)
-   -  nemisis -> **password:chicken**
-   -  Revoked.Mayhem -> **password:westwoodworld**
+- `hashcat -m 0 -a 0 hash.txt /usr/share/john/password.lst` (hash.txt contains the hashes)
+   -  nemisis -> **password: chicken**
+   -  Revoked.Mayhem -> **password: westwoodworld**
