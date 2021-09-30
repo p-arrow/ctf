@@ -176,3 +176,5 @@ monkey
 - `hashcat -m 0 -a 0 hash.txt /usr/share/john/password.lst` (hash.txt contains the hashes)
    -  nemisis -> **password: chicken**
    -  Revoked.Mayhem -> **password: westwoodworld**
+   -  John -> **password: gymsoft**
+   -  Gizmo -> **password: evisumake**
