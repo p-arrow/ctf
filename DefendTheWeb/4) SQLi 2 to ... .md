@@ -108,3 +108,59 @@
 - We follow the link and get to a login page. How dare you ;)
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135170918-3864a256-8853-4e11-9cf3-982536a271b9.png)
+
+... 
+
+<br />
+
+## Planet Bid / Realistic
+
+![grafik](https://user-images.githubusercontent.com/84674087/135499843-15c32718-769e-4a87-9baf-7eeff8fb2322.png)
+
+#### Solution
+- PlanetBid username: Revoked.Mayhem
+- Safe Transfer account (of Revoked.Mayhem): 64957746
+- "Opponent" uses Safe Transfer
+- "Opponent" uses email beta
+- Other user names: John, nemesis, Zinc, Gizmo
+- Top10 Passwords:
+
+```
+password
+qwerty
+pass
+(name)
+12345
+abc123
+123
+letmein
+asdfg
+monkey
+```
+
+- Let us start with PlanetBid login website
+- We open Burpsuite, activate our proxy and catch a POST request (I removed the cookie values):
+
+![grafik](https://user-images.githubusercontent.com/84674087/135508306-9d611c8a-bbfa-47c8-8030-d85231db7f7d.png)
+
+- We start with the username **admin** and grab the passwords listed above (I added some more for safety sake):
+
+![grafik](https://user-images.githubusercontent.com/84674087/135508144-f842ab57-f29f-4c2f-83dc-3288f412439a.png)
+
+- We succeed with password **letmein** !
+
+![grafik](https://user-images.githubusercontent.com/84674087/135508509-c41327c2-1479-4362-ad70-95f28f9933e8.png)
+
+# | User | Email
+--| ---- | -----
+11 | nemesis | jfelliot@mail.com
+14 | John | run@dmail.com
+23 | Zinc | Loltown@Googtube.com
+29 | Gizmo | 	Decalz@mappers.com
+31 | Revoked.Mayhem | Caffe@hotbiz.com
+36 | admin | hellomum@yawn.go
+
+- On bids overview we discover the **"Opponent"** who made the deal with Revoked.Mayhem:
+- It is **nemesis** ! So, Revoked.Mayhem goes crazy because of £1.32 ?! :D
+
+![grafik](https://user-images.githubusercontent.com/84674087/135510187-f533c82c-fff2-42fb-9995-5d6af8579503.png)
