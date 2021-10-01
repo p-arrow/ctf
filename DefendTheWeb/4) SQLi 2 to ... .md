@@ -193,3 +193,54 @@ monkey
 
 - We go back to Safe Transfer and login as nemisis
 - Final step is to transfer the amount of £1.32 back to the account no. 64957746 (Revoked.Mayhem)
+
+
+<br />
+
+## Access Logs
+
+![grafik](https://user-images.githubusercontent.com/84674087/135623993-bd1159e2-285f-40ef-ba8d-39c11fc3fda7.png)
+
+#### Solution
+- How does the output look like after failed login attempt?
+
+![grafik](https://user-images.githubusercontent.com/84674087/135624955-7a971e7e-f4d7-45df-a321-af0da08ead69.png)
+
+- Following data gets logged: date/time, password correct/wrong, entered username and IP address
+- It is not requested to find specific username or password (!)
+- Simply avoid detection when entering your data into the access log file
+- ... So, we have to escape from parsing ...
+- The standard escape sequence for end of line is `\n`
+- When you enter `\n` in the username field and press enter you pass the challenge ;)
+
+<br />
+
+## Sandra Murphy
+
+![grafik](https://user-images.githubusercontent.com/84674087/135635789-ab9783d4-b2eb-48f4-80d5-4e3be52b82fb.png)
+
+#### Solution
+- The content of the XML data:
+```
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="users">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="user">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="login"/>
+              <xs:element type="xs:string" name="password"/>
+              <xs:element type="xs:string" name="realname"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+```
+
+
+
+
