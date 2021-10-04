@@ -101,7 +101,7 @@
 ![grafik](https://user-images.githubusercontent.com/84674087/135170965-08818cc6-e723-476b-824d-aa5bf18c47b0.png)
 
 - We click around and get finally to the submit-page where we can enter our own wish letter
-- While checking the source code of this site we notice the href `mod.php`:
+- While checking the source code of this site we notice the href **/mod.php**:
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135169670-fd189fa0-2c4c-41a4-a0f5-d15d1b76dda5.png)
 
@@ -109,7 +109,27 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/135170918-3864a256-8853-4e11-9cf3-982536a271b9.png)
 
-... 
+- We have some potential usernames:
+    - Sam Wright
+    - Thomas Bell
+    - Richard Head
+    - Santa Claus
+    - Admin ;)
+    
+- At the first glance, none of these is working in combination with simple/common passwords (I tried it with Burpsuite)
+- So, let's bypass the login page with SQLi: `' or '1'='1` (entered in both input fields)
+- Well done, we are now at **/mod.php?edit** !
+
+![grafik](https://user-images.githubusercontent.com/84674087/135908220-403553a3-a62e-4987-aaed-761ac5b215ba.png)
+
+- It is not possible to upload own files (e.g. the picture "xmas_warning")
+- Instead, we can access files that exist on the web server, e.g. letter1.txt, letter2.txt ... also php files like index.php, top.php
+
+![grafik](https://user-images.githubusercontent.com/84674087/135908557-4512dce6-0823-490b-8c48-008ce1ee9e58.png)
+
+- This being said, why don't we copy&paste the content of `https://defendtheweb.net/extras/playground/xmas08/xmas_new.html` into index.php and save it?
+- We do so and yes, it works ! 🙂
+
 
 <br />
 
