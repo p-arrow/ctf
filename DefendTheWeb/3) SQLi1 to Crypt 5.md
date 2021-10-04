@@ -134,16 +134,17 @@
 Port | Service
 ---- | ------- 
 22 | SSH
-25 | SMTP
+25 | SMTP (closed)
 80 | HTTP
 443 | HTTPS
 8000 | HTTP Alternative (Go Web Server)
 9100 | Jetdirect (HP printer service)
 
 - Further, I figured out that slow scans are preferred over aggressive scans to get results
-- Some days passed while I put this challenge aside. Then I tried it again with following setup: `nmap -A -T2 3.10.42.19` ... no new insight though
-- By coincidence it came to my mind that IRC's are a common service and defendtheweb perhaps is running one
-- IRC is normally running on port 6667, but to be on the safe side I decided to check port 6000- 7000
+- Some days passed while I put this challenge aside
+- Then I tried it again with following setup: `nmap -A -T2 3.10.42.19` ... no new insight though
+- By coincidence, it came to my mind that IRC's are a common service and perhaps defendtheweb is running one
+- IRC is normally running on port 6667, but to be on the safe side I decided to check port 6000 - 7000
 - 1st try: `nmap -A -T3 -p6000-7000 3.10.42.19`: No result !
 - 2nd try: `nmap -A -T2 -p6000-7000 3.10.42.19`: Success !
 
