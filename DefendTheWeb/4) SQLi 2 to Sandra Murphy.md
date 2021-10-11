@@ -274,10 +274,10 @@ monkey
     - Username: `blah' or 1=1 or 'a'='a`
     - Password: `blah` 
 - Let us think once more: We have no username and no password, but we have a real name
-- Additionally OWASP states: "In this case, only the first part of the XPath needs to be true. The password part becomes irrelevant, and the UserName part will match ALL employees because of the “1=1” part."
-- Applied to our challenge we need username evaluated as TRUE 
-- If we enter `blah' or 1=1 or 'a'='a` we don't get "Invalid login details" but **"Error on request"**
-- The 1=1 part has apparently no effect here, so why don't we enter the information that we know is true ?!
+- Additionally OWASP states: *"In this case, only the first part of the XPath needs to be true. The password part becomes irrelevant, and the UserName part will match ALL employees because of the “1=1” part."*
+- Applied to our challenge we need the username to be evaluated as TRUE 
+- If we enter `blah' or 1=1 or 'a'='a` we don't get "Invalid login details" but **"Error on request"** ... are we getting closer ? :)
+- The `1=1` part has apparently no effect here, so why don't we enter the information that we know is true ?!
 - Let's modify the XPath injection: `blah' or realname='Sandra Murphy' or 'a'='a`
 - SUCCESS!
 
