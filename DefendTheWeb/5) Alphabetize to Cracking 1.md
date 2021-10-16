@@ -31,3 +31,15 @@ console.log(x);                     // output the sorted words into the answer f
 #### Solutions
 
 <br />
+
+## Custom encoding / Coding
+
+![grafik](https://user-images.githubusercontent.com/84674087/137583606-917142ca-8eb8-4103-8fc8-c81fb60dbd86.png)
+
+The custom encryption method:
+
+![grafik](https://user-images.githubusercontent.com/84674087/137583647-5e8143eb-27bf-4c31-bc46-77d713091e94.png)
+
+#### Solution
+
+<br />
