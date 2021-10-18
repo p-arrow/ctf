@@ -71,7 +71,11 @@ for (i = 0; i < x.length; i++) {
 - First I try to mount the file forensics1.img onto Kali Linux: 
       - `sudo mkdir /mnt/disk`
       - `sudo mount -o loop ../forensics1.img /mnt/disk` 
-- Surprise ! No files are mounted ... I try it severla times and even though there is no error message it doesn't work
+- Surprise ! No files are mounted ... I try it several times and even though there is no error message it doesn't work
+- Hint:
+      -  `fdisk -l [file.img]` To check from which block the file starts
+      -  `mount -o loop,offset=$((128 * 512)) file.img /mnt/disk1`: Wherein 128 is the start block and 512 the block size, to calculate the offset
+      -  `umount /mnt/disk1`: If you need to unmount the file system
 - Hm, then let's check any forensic tools could extract information from an image file
 - `binwalk forensics1.img` ... not much output except that reveals information about the file system: ext4
 - `bulk_extractor forensics1.img`
@@ -102,6 +106,20 @@ for (i = 0; i < x.length; i++) {
 
 ![grafik](https://user-images.githubusercontent.com/84674087/137771903-0ef5aaa8-bd8c-4ed9-9acc-d18f203ee2fb.png)
 
+- the wav file is called **conversation_dtmf**
+- If I play the audio it sounds like an old 56k modem dials in ...
+- When we look for we find "dtmf" we find it's a abbreviation of **Dual Tone Multi Frequency**
+- Then we search for "decode dtmf tone from wav file" and get this handy site: [http://www.dialabc.com](http://www.dialabc.com/sound/detect/index.html)
+
+![grafik](https://user-images.githubusercontent.com/84674087/137801325-362ea58c-7d06-49a1-b64e-61d46df113be.png)
+
+- When uploading the wav file we get this code: **AA6BA4A83C67DDC7**
+- I expected too much because when I enter this code into the answer field at DefendTheWeb I cannot succeed 😞
+- I decided to play around with the code like inputting the code reversed or only some parts of it (straight and reversed)
+- Finally, I listened again to the sound file and I noticed this pattern: ####...####...####...####
+- There is a break in between four connected sounds
+- Maybe, I need to split the code into four fragments: **AA6B-A4A8-3C67-DDC7**
+- It works !
 
 <br />
 
