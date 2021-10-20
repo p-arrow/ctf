@@ -22,12 +22,14 @@
    - not much new output  
 - `objdump cracking1.exe -d`: Display assembly code
    - `-d` = disassemble 
+   - good output but not so handy as real Reverse Engineering tools
 
-All those tools mentioned above give us a first impression about what this .exe contains, but to get deeper into it program flow and structure we need a Revere Engineering tool. There are several tools available, but for now we will take a look at **ollydbg**.
+All those tools mentioned above give us a first impression about what this .exe contains, but to get deeper into program flow and structure we need a Revere Engineering tool. There are several tools available, but for now we will take a look at **ollydbg** only.
 
 - If not yet installed: `sudo apt install ollydbg`
 - Initial info: [https://www.kali.org/tools/ollydbg/](https://www.kali.org/tools/ollydbg/)
-- From now on I will roughly describe what I did. Honestyl speaking it's easier to demonstrate such tools with a video, but I stick to comments in this markdown
+- I will roughly describe what I did, however, honestly speaking it's easier to demonstrate such tools along with a video
+- Despite that fact, I stick to comments in this markdown for efficiency purpose ;-)
 
 1. Load crackin1.exe into ollydbg
 2. Right click in the main thread, select "search for" and then "all referenced text strings". This brings us to this overview:
