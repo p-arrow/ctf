@@ -86,10 +86,38 @@ DK8y2toYISJVK3qK+CEjl3ntntE=
 
 - We save the message as `dtw.key`
 - Then we check/verify the signer when we try to decrypt the message: 
-    - `gpg --decrypt dtw.key > plain.txt` OR
-    - `gpg --verify dtw.key`
+   - `gpg --decrypt dtw.key > plain.txt` OR
+   - `gpg --verify dtw.key`
 - This yields below output:
 
 ![grafik](https://user-images.githubusercontent.com/84674087/138153609-7354f2a7-2188-4b38-b67b-560c7dec4ca3.png)
 
 - If we enter **aiden** or **aiden@defendtheweb.net** into the answer field then we get "invalid login details"
+- We do not have the public key of aiden, but we can search for it online: `gpg --keyserver pgp.mit.edu --search-keys aiden@defendtheweb.net`
+   -  `pgp.mit.edu` is the public key server of MIT University. Apparently a popular one where chance is high you find the key you are looking for
+- The output is not helpful though: 
+
+![grafik](https://user-images.githubusercontent.com/84674087/138156997-6f27cd9d-9a16-4a33-be49-c5f8f9030aeb.png)
+
+- Another command which may provide us the desired hint could be `gpg --list-packets --verbose dtw.key`
+- This commmand is for debugging purpose and dumps information
+
+![grafik](https://user-images.githubusercontent.com/84674087/138159938-39edf5c4-87c8-428f-9dd2-8f2184d225df.png)
+
+- issuer keyid:  48BF6357AB80EB5E
+- data packet name: pgp1input.txt
+- issue fingerprint: E830844527BBD244081FF5F948BF6357AB80EB5E
+
+So, you might ask yourself how we can utilize this output to proceed on this challenge. I find this pretty clue after scrolling through `man gpg`:
+
+![grafik](https://user-images.githubusercontent.com/84674087/138163003-2e287960-653c-493e-8663-46c37e0c1feb.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/138163082-3610029e-d905-4859-8d82-8ea46e121abf.png)
+
+- Awesome, so let's give it another try
+- We use: `gpg --keyserver pgp.mit.edu --receive-keys 48BF6357AB80EB5E`
+- This provides us with the information about the public key owner: **Aiden Lawrence**
+- SUCCESS ! 😙
+
+
+
