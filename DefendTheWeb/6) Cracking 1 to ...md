@@ -179,7 +179,7 @@ Well, I found this pretty clue after scrolling through `man gpg`:
 
 #### Solution
 - It looks like our keyID / fingerprint is requested, so that our identity can be verified by Aiden Lawrence
-- We generate a key pair: gpg --full-gen-key
+- We generate a key pair: `gpg --full-gen-key`
 - Next, we send our fingerprint to MIT's keyserver:  `gpg --keyserver pgp.mit.edu --send-keys [your fingerprint]`
 - To check if the key really arrived: `gpg --keyserver pgp.mit.edu --refresh-keys`
 - We wait a while and copy&paste our fingerprint into the answer field ... and get an error message: **key not found** ?!
