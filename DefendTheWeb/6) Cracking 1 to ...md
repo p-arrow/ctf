@@ -183,6 +183,13 @@ Well, I found this pretty clue after scrolling through `man gpg`:
    - keyID: 9ECFA8612F441401
    - fingerprint: CA329AB9573772C8F81361E09ECFA8612F441401
 - Next, we send our fingerprint to MIT's keyserver:  `gpg --keyserver pgp.mit.edu --send-keys [your fingerprint]`
+- Alternative key servers:
+   - https://keybase.io
+   - https://keys.openpgp.org
+   - https://keyserver.ubuntu.com
+   - http://keys.gnupg.net
+   - https://pgp.mit.edu
+   - https://keyoxide.org 
 - To check if the key really arrived: `gpg --keyserver pgp.mit.edu --refresh-keys`
 - We wait a while and copy&paste our fingerprint into the answer field ... and get an error message: **key not found** ?!
 
