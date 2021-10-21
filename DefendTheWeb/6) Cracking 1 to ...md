@@ -46,6 +46,20 @@ Finally we find the password: **JE74toJNZ75** 🙂
 
 <br />
 
+## Captcha 1 / Captcha
+
+![grafik](https://user-images.githubusercontent.com/84674087/138234030-3f8ec05d-1eef-4f17-a2a6-70933cdbb68b.png)
+
+#### Solution
+- We select the captcha image with Javascript and save it as variable captcha: `var captcha = document.getElementsByTagName("img")[1]`
+- There are probably two ways to solve this challenge:
+   1. Read from image / Extract string from image (tesseract.js is popular on that / OCR [Optical Character Recognition])
+   2. Understand how the php code works to create the captcha yourself
+- 
+
+
+<br />
+
 ## Unknown Sender / GPG
 
 ![grafik](https://user-images.githubusercontent.com/84674087/138114953-4cbdd87d-4018-4dd8-8ad1-16a0d7aabdf1.png)
