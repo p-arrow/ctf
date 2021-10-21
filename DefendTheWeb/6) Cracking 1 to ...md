@@ -170,3 +170,18 @@ Well, I found this pretty clue after scrolling through `man gpg`:
 ![grafik](https://user-images.githubusercontent.com/84674087/138336367-8fd13af5-dcaf-4b2a-af7b-fe70fa74729f.png)
 
 - We copy&paste this into the answer field and succeed !
+
+<br />
+
+## Something for you / GPG
+
+![grafik](https://user-images.githubusercontent.com/84674087/138344278-8624dc1d-4493-4f76-ae51-646647f7ed63.png)
+
+#### Solution
+- It looks like our keyID / fingerprint is requested, so that our identity can be verified by Aiden Lawrence
+- We generate a key pair: gpg --full-gen-key
+- Next, we send our fingerprint to MIT's keyserver:  `gpg --keyserver pgp.mit.edu --send-keys [your fingerprint]`
+- To check if the key really arrived: `gpg --keyserver pgp.mit.edu --refresh-keys`
+- We wait a while and copy&paste our fingerprint into the answer field ... and get an error message: **key not found** ?!
+
+
