@@ -51,11 +51,24 @@ Finally we find the password: **JE74toJNZ75** 🙂
 ![grafik](https://user-images.githubusercontent.com/84674087/138234030-3f8ec05d-1eef-4f17-a2a6-70933cdbb68b.png)
 
 #### Solution
-- We select the captcha image with Javascript and save it as variable captcha: `var captcha = document.getElementsByTagName("img")[1]`
-- There are probably two ways to solve this challenge:
-   1. Read from image / Extract string from image (tesseract.js is popular on that / OCR [Optical Character Recognition])
-   2. Understand how the php code works to create the captcha yourself
-- 
+```
+//Access captcha.php image
+var captcha = document.getElementsByTagName("img")[1]
+
+//extract string from image
+//tesseract.js is popular on that, referring to OCR [Optical Character Recognition])
+//But I am to solve this task inside the console with JS only
+captcha ...
+
+//Reverse string
+captcha = captcha.split('').reverse().join('')
+
+//Enter reversed string in answer field
+document.getElementById("answer").value="captcha";
+
+//Press submit button
+document.forms[1].submit()
+```
 
 
 <br />
@@ -138,5 +151,22 @@ Well, I found this pretty clue after scrolling through `man gpg`:
 - This provides us with the information about the public key owner: **Aiden Lawrence**
 - SUCCESS ! 😙
 
+<br />
 
+## Private Correspondence / GPG
 
+![grafik](https://user-images.githubusercontent.com/84674087/138331725-a24af591-9a04-4d40-9198-a2f1e1d806c6.png)
+
+#### Solution
+- Plain text: `Hello, my name is TestDummy but you can call me lord_tryzalot`
+- We open our terminal and enter: `gpg --recipient aiden@defendtheweb.net --armor --encrypt plain.txt`
+   - `--armor` = for base64 encoded output
+   - `--recipient` = to specify the public key
+
+![grafik](https://user-images.githubusercontent.com/84674087/138336044-f9b90916-758f-419d-a0fb-2267cca5e29e.png)
+
+- This produces **plain.txt.asc**:
+
+![grafik](https://user-images.githubusercontent.com/84674087/138336367-8fd13af5-dcaf-4b2a-af7b-fe70fa74729f.png)
+
+- We copy&paste this into the answer field and succeed !
