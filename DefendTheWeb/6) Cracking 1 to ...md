@@ -189,7 +189,6 @@ Well, I found this pretty clue after scrolling through `man gpg`:
    - https://keyserver.ubuntu.com
    - http://keys.gnupg.net
    - https://pgp.mit.edu
-   - https://keyoxide.org 
 - To check if the key really arrived: `gpg --keyserver pgp.mit.edu --refresh-keys`
 - We wait a while and copy&paste our fingerprint into the answer field ... and get an error message: **key not found** ?!
 
