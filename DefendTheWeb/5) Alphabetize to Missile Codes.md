@@ -34,7 +34,7 @@ console.log(x);                     // output the sorted words into the answer f
 - Since we are speaking about an audio file, how about an audio analyze software?
 - After searching through the web I found recommendations about:
    - [Sonic Visualizer](https://sonicvisualiser.org/download.html)
-   - [Audacity](https://www.audacityteam.org/)  
+   - [Audacity](https://www.audacityteam.org/); further installation details: [github](https://github.com/audacity/audacity/blob/master/BUILDING.md)
    - At the end of the day I decided to go along with Audacity
 - We open the file in audacity (Initially I played around with the settings to get used with the program)
 - I figured out that applying the spectogram filter provides a better insight that the original sound waveform
