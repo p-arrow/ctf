@@ -128,3 +128,73 @@
 #### Solution
 - The shown code `1c63129ae9db9c60c3e8aa94d3e00495` is a MD5 hash: [https://hashes.com/en/tools/hash_identifier](https://hashes.com/en/tools/hash_identifier)
 - After decryption: **1qaz2wsx**
+
+
+## HTTP method / Intro
+
+![grafik](https://user-images.githubusercontent.com/84674087/134051998-fd93b506-8410-4760-83f2-b1e6a2994182.png)
+
+#### Solution
+- In the first place, we try to send a POST request by using Burp
+
+![grafik](https://user-images.githubusercontent.com/84674087/134057291-25608174-4be4-4fa1-a173-feb5ae99962b.png)
+
+- However, no reaction ... even when changing the input style to `password:d612765f63` or attaching the password as parameter to the URL
+- Another attempt is Basic HTTP Authentication: [developer.mozilla.org/HTTP/Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+```
+POST /playground/http-method HTTP/2
+...
+...
+
+Authorization: Basic d612765f63
+```
+
+- This didn't help either
+- So, why don't we check the sourcecode again ...
+
+![grafik](https://user-images.githubusercontent.com/84674087/134056972-89920fd0-84f8-4089-a0fc-753419011408.png)
+
+- It seems we have to input some HTML code by ourselves in order to enter the password inside a form
+- Let's copy the needed HTML code from another/previous game
+- Then simply remove the username section and add your specific token value
+
+```
+<form class="form--intro-1" method="post" enctype="multipart/form-data">
+
+       <div class="input input--hidden " data-group="token">
+         <input type="hidden" name="token" id="token" value="enterYourValueHere" maxlength="" placeholder="" class="u-full-width" />
+       </div>
+         
+       <div class="input input--hidden " data-group="formid">
+         <input type="hidden" name="formid" id="formid" value="enterYourValueHere" maxlength="" placeholder="" class="u-full-width" />
+       </div>
+                          
+       <div class="input input--password " data-group="password">
+         <label for="password">Password</label>                            
+         <input type="password" name="password" id="password" value="" maxlength="" placeholder="" class="u-full-width" />
+       </div>
+      
+       <button type="submit" class="button button--main right">Log in</button>
+</form>
+```
+
+- Then the website looks like below and we can proceed by using the given password
+
+![grafik](https://user-images.githubusercontent.com/84674087/134059264-7f5cf3e2-e5dd-410c-a85b-a2aa43bcab05.png)
+
+<br />
+
+
+## Sid / Intro
+
+![grafik](https://user-images.githubusercontent.com/84674087/134189910-2fccacec-840f-4538-a491-a863deb3e67e.png)
+
+- When we click on enter:
+
+![grafik](https://user-images.githubusercontent.com/84674087/134190013-6773ca3d-4a2f-4452-ac9b-866127c6d2ab.png)
+
+#### Solution
+
+- Open DevTool: `Control + Shift + E`
+- Go to storage and find four cookies, wherein only one is related to this game: *i3_access = false*
+- Change the value to **true** et voilà
