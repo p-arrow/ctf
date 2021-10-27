@@ -8,8 +8,8 @@
 
 `<script type='text/javascript'> $(function(){ $('.level form').submit(function(e){ e.preventDefault(); if(document.getElementById('password').value == correct) { document.location = '?pass=' + correct; } else { alert('Incorrect password') } })})</script>`
 
-- We recognize that the function compares the entered password with the variable **correct**
-- Is this variable maybe hardcoded somewhere inside the website/sourcecode? Let's search with `Control + F`
+- We recognize that this function compares the entered password with the variable **correct**
+- Is this variable maybe hardcoded somewhere inside the sourcecode? Let's search with `Control + F`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134044546-d20d141b-2825-4e65-9377-817a9cc65a5e.png)
 
@@ -45,12 +45,11 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134198815-3ed975ef-13fe-48f1-878f-12d8d3db31f4.png)
 
-- No matter what we change at the beginning of the sourcecode, "thecode" gets overwritten in the final end ...
-- We translate the hexcode into ASCII and get this phrase: **c221802f20**
+- No matter what we change at the beginning of the sourcecode, "thecode" gets overwritten in the final end
+- We translate from hexcode to ASCII and get this phrase: **c221802f20**
+- SUCCESS !
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134201166-f613eeb3-cd36-4eba-be3c-520083e2828f.png)
-
-- This is the correct password because we can enter the next game !
 
 **ALTERNATIVE**
 - Open DevTool: `Control + Shift + E`
@@ -85,10 +84,11 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134383707-c64e9aca-a71e-470b-8f96-b6e1839cb89e.png)
 
-- That is, some thoughts later we experimentally replace `intro11?input` by `intro11#`
-- The # pretends that everything followed after that is NOT sent to the server (as if we remove `?input` entirely)
-- We send  # and check the sourcecode with Debugger et voilà - look at line 473 !
+- Some thoughts later we experimentally replace `intro11?input` with `intro11#`
+- `#` pretends that everything followed after it is NOT sent to the server (as if we remove `?input` entirely)
+- We send `#` and check the sourcecode with Debugger - look at line 473 !
+- Password: **69a6681821**
 
 ![grafik](https://user-images.githubusercontent.com/84674087/134394228-d17b906d-08f2-4da7-8991-825c7e3d3dc1.png)
 
-- Password: **69a6681821**
+
