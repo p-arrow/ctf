@@ -35,3 +35,52 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/141143265-1156d679-c127-4fd7-9344-71dd69698367.png)
 
+<br />
+
+## Nice netcat
+
+![grafik](https://user-images.githubusercontent.com/84674087/141315622-b3ea5ce4-7d61-4160-8719-8baf6c4e0ce5.png)
+
+#### Solution
+- Open the terminal and enter the given command `nc mercury.picoctf.net 35652`
+- This prints a bunch of numbers separated by newline
+
+![grafik](https://user-images.githubusercontent.com/84674087/141318950-d167b147-0efd-4119-bc73-1d5fe8ebdbd9.png)
+
+- When we turn these numbers from decimal into ASCII we get the flag
+- To make our life easier we write a short python script as below:
+
+```
+string = ""
+with open("text") as text:   // save the nc output into a file called "text"
+        for line in text:    // look at each line of text
+                string += chr(int(line.strip('\n')))  // remove newline, turn the string into integer and convert to ASCII
+print(string)
+```
+- **FLAG:** picoCTF{g00d_k1tty!_n1c3_k1tty!_9b3b7392}
+
+<br />
+
+## Nice netcat
+
+#### Solution
+
+<br />
+
+## Nice netcat
+
+#### Solution
+
+<br />
+
+## Nice netcat
+
+#### Solution
+
+<br />
+
+## Nice netcat
+
+#### Solution
+
+<br />
