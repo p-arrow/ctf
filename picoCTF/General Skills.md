@@ -61,25 +61,42 @@ print(string)
 
 <br />
 
-## Nice netcat
+## Static ain't always noise
+
+![grafik](https://user-images.githubusercontent.com/84674087/141319725-8f6ff7b2-253a-4028-9246-e89061145938.png)
+
+#### Solution
+
+![grafik](https://user-images.githubusercontent.com/84674087/141319931-7b7d61ec-4d6f-4745-abff-e9eb5d8e8b85.png)
+
+- The ltdis.sh script performs two tasks
+    -  object dump (= normally assembler content of all sections), but only prints the ".text" section --> $1.ltdis.x86_64.txt
+    -  Ripping strings from binary --> $1.ltdis.strings.txt
+- The output of $1.ltdis.strings.txt reveals the flag
+- **FLAG:** picoCTF{d15a5m_t34s3r_f6c48608}
+
+<br />
+
+## Tab, Tab, Attack
+
+![grafik](https://user-images.githubusercontent.com/84674087/141321989-cd7a0e02-f8a4-4283-a287-c158544fcf32.png)
+
+#### Solution
+- `unzip Addadshashanammu.zip`
+- get through to the script and execute it
+- **FLAG:** picoCTF{l3v3l_up!_t4k3_4_r35t!_76266e38}
+
+![grafik](https://user-images.githubusercontent.com/84674087/141322441-90ee36a1-95f9-4449-9a6e-7d4da4643bda.png)
+
+<br />
+
+## Nice 
 
 #### Solution
 
 <br />
 
-## Nice netcat
-
-#### Solution
-
-<br />
-
-## Nice netcat
-
-#### Solution
-
-<br />
-
-## Nice netcat
+## Nice 
 
 #### Solution
 
