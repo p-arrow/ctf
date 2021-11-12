@@ -90,14 +90,28 @@ print(string)
 
 <br />
 
-## Nice 
+## Magikarp Ground Mission
+
+![grafik](https://user-images.githubusercontent.com/84674087/141510824-494e2a7d-fd31-4123-b210-c5e6a20e4631.png)
 
 #### Solution
+- Launch the instance and login via ssh as instructed
+
+![grafik](https://user-images.githubusercontent.com/84674087/141511114-50bad98f-c959-48d7-aba8-1fb0f32bcf77.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/141511285-1df0dcd2-477a-4d02-aaff-b1df10a3b643.png)
+
+- **FLAG:** picoCTF{xxsh_0ut_0f_\/\/4t3r_c1754242}
 
 <br />
 
-## Nice 
+## Lets Warm Up
+
+![grafik](https://user-images.githubusercontent.com/84674087/141511504-4b7faa1d-4a4e-43f7-96fd-6ccf66bb5bca.png)
 
 #### Solution
+- A) You can use an online converter
+- B) You can your terminal: `echo "0x70" | xxd -r`
+- - **FLAG:** picoCTF{p}
 
 <br />
