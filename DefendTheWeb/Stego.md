@@ -79,5 +79,13 @@ AF:xeH | Hex: FA
 60:loC | Col:06
 1911:woR | Row:1191
 
+- I download the image **DSWii6x.png** and try to analyze it with zsteg
+- `zsteg DSWii6x.png`
+
+![grafik](https://user-images.githubusercontent.com/84674087/142044248-f0ae8659-4085-4b6a-b1df-ad2f63d5da34.png)
+
+- Another try: `binwalk DSWii6x.png`
+
+![grafik](https://user-images.githubusercontent.com/84674087/142044478-94043a93-8d1a-4072-88fb-8c1f48497af9.png)
 
 <br />
