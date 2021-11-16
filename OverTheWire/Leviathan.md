@@ -41,6 +41,7 @@ the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="I
 - A) We could try to modify the running program using gdb
 - B) We find a way to bypass the access and getuid controls until we reach the system call
 - The option B) can be achieved by using a trick: We create a file that contains whitespace in its name, e.g. "file 2.txt"
+- printfile will split up the system call into two parts: "file" + " 2"
 - Proof of concept: `printfile /tmp/test/"file 2".txt`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/142075688-5b3d4b3b-5c0c-4bd0-82ec-c08aebba25d5.png)
