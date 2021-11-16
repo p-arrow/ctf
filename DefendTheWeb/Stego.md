@@ -56,3 +56,28 @@
 
 
 <br />
+
+## 0xBBA5 / Stego
+
+![grafik](https://user-images.githubusercontent.com/84674087/142041047-4e5e61b6-1e7f-4356-9f9d-cc596b3126e3.png)
+
+#### Solution
+- The text file shows reversed text. We transform it accordingly
+
+input | reversed
+----- | --------
+17:xeH | Hex:71
+70:loC | Col:07
+0121:woR | Row:1210
+AF:xeH | Hex: FA
+41:loC | Col:14 
+9021:woR | Row:1209
+11:xeH | Hex:11
+51:loC | Col:15
+0021:woR | Row:1200
+47:xeH | Hex:74
+60:loC | Col:06
+1911:woR | Row:1191
+
+
+<br />
