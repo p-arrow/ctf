@@ -31,7 +31,22 @@ the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="I
 - Immediately we try: `./printfile /etc/leviathan_pass/leviathan3` but we we get this output: **You cant have that file...**
 - It seems we have to escalate our user rights
 - Below you can see how printfile works: `ltrace ./printfile /etc/leviathan_pass/leviathan3`
-    - In the upper case we have access to file. The program asks for our effective uid twice (`geteuid()`) and sets the real uid (`setreuid(12002, 12002)`
-    - In the lower case we do not get access
+    - We get access granted to the file we specified
+    - Our effective uid is retrieved twice (`geteuid()`)
+    - printfile then sets the effective uid (`setreuid(12002, 12002)`)
+    - A system call performs `/bin/cat` upon the file we specified
 
 ![grafik](https://user-images.githubusercontent.com/84674087/142065462-2d606c01-b0fa-4c45-8af3-d929abc845fb.png)
+
+- A) We could try to modify the running program using gdb
+- B) We find a way to bypass the access and getuid controls until we reach the system call
+- The option B) can be achieved by using a trick: We create a file that contains whitespace in its name, e.g. "file 2.txt"
+- Proof of concept: `printfile /tmp/test/"file 2".txt`
+
+![grafik](https://user-images.githubusercontent.com/84674087/142075688-5b3d4b3b-5c0c-4bd0-82ec-c08aebba25d5.png)
+
+- In this way, printfile gets through the whole code and performs the system call
+- We just have to find a way to let it read the file that contains the password for Leviathan3
+- To accomplish this task we utilize a symbolic link: `ln -s /etc/leviathan_pass/leviathan3 /tmp/test/file.txt`
+- `./printfile /tmp/test/"file 2".txt` will then try to read out `/tmp/test/file.txt` and `/tmp/test/ 2.txt`, wherein the latter one does not exist and the former one leads to the password 
+- **PASSWORD:** Ahdiemoo1j
