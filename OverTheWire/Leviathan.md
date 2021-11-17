@@ -51,3 +51,53 @@ the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="I
 - To accomplish this task we utilize a symbolic link: `ln -s /etc/leviathan_pass/leviathan3 /tmp/test/file.txt`
 - `./printfile /tmp/test/"file 2".txt` will then try to read out `/tmp/test/file.txt` and `/tmp/test/ 2.txt`, wherein the latter one does not exist and the former one leads to the password 
 - **PASSWORD:** Ahdiemoo1j
+
+<br />
+
+## Leviathan3
+- The directory contains the file **level3**
+- Let's start it attached to ltrace: `ltrace ./level3`
+- The output:
+
+![grafik](https://user-images.githubusercontent.com/84674087/142216555-6ace1658-5873-4b18-bffc-c8d7f4b6c7e8.png)
+
+- The program compares the password we entered: `strcmp("hit\n", "snlprintf\n")`
+- We run level3 once again and enter snlprintf é voila: We got the Shell !
+- Consequently we hit `cat /etc/leviathan_pass/leviathan4` and obtain the password
+- **PASSWORD:** vuH0coox6m
+
+<br />
+
+<br />
+
+## Leviathan4
+- We enter `ls -la` and find **.trash**, where the binary **bin** exists
+- The program outputs a binary code: `01010100011010010111010001101000001101000110001101101111011010110110010101101001`
+- Transformed into ASCII reveals the **PASSWORD**: Tith4cokei
+- How to transform?
+    - A) Online Converter
+    - B) Perl: `./bin | perl -lape '$_=pack"(B8)*",@F'`
+        - `-e` expression evaluate the given expression as perl code
+        - `-p` sed mode. The expression is evaluated for each line of input 
+        - `-l` sed mode. Instead of the full line, only the content of the line (without the line delimiter)
+        - `-pack` Convert binary to ASCII. See `perldoc -f pack` for details
+        - `"(B8)*"` extract 8 bits at a time 
+<br />
+
+
+## Leviathan5
+- The story:
+
+![grafik](https://user-images.githubusercontent.com/84674087/142221088-366fa39d-19c5-4ac4-bafc-b3725ff6e23e.png)
+
+- If we create the required file, fill some random chars into it and start leviathan5 then the following happens:
+
+![grafik](https://user-images.githubusercontent.com/84674087/142230845-6b58c57d-63f5-40ad-82fc-1d66a3550ddb.png)
+
+- Each char is read and displayed: `fgetc` = file get char
+- We need to find a way to access `/etc/leviathan_pass/leviathan6` through leviathan5 in order to get the password disclosed
+- The first thought is a symbolic link: `ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log`
+- However, if we run leviathan5 then it cannot find `/tmp/file.log` ...
+
+
+<br />
