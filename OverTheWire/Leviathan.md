@@ -97,7 +97,38 @@ the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="I
 - Each char is read and displayed: `fgetc` = file get char
 - We need to find a way to access `/etc/leviathan_pass/leviathan6` through leviathan5 in order to get the password disclosed
 - The first thought is a symbolic link: `ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log`
-- However, if we run leviathan5 then it cannot find `/tmp/file.log` ...
-
+- Apparently it is a good thought ;) We run `./leviathan5` and succeed
+- **PASSWORD:** UgaoFee4li
 
 <br />
+
+## Leviathan6
+- The story:
+
+![grafik](https://user-images.githubusercontent.com/84674087/142235623-2753577e-aaaf-4f69-b7d6-179256c78012.png)
+
+- A four digit code is simple to brute force
+- We just have to write a small script to automate the process
+
+Option A)
+```
+#!/bin/bash
+
+i=1
+while [ $i -le 10000 ]
+do
+echo "$i" >> /tmp/tmp/file.log &
+~/leviathan6 $i >> /tmp/tmp/file.log &
+((i++))
+sleep 0.01
+done
+```
+
+Option B)
+```
+#!/bin/bash
+
+for i in {0, 9999} do
+    ~/leviathan6 $i >> /tmp/tmp/file.log &
+done
+```
