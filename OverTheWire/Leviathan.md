@@ -117,10 +117,10 @@ Option A)
 i=1
 while [ $i -le 10000 ]
 do
-echo "$i" >> /tmp/tmp/file.log &
-~/leviathan6 $i >> /tmp/tmp/file.log &
-((i++))
-sleep 0.01
+    echo "$i" 
+    ~/leviathan6 $i 
+    ((i++))
+    sleep 0.01
 done
 ```
 
@@ -128,7 +128,15 @@ Option B)
 ```
 #!/bin/bash
 
-for i in {0, 9999} do
-    ~/leviathan6 $i >> /tmp/tmp/file.log &
+for i in {0..9999}
+do
+    echo "$i"
+    ~/leviathan6 $i
 done
 ```
+
+- Once we find the correct pin (7123) we get the shell:
+
+![grafik](https://user-images.githubusercontent.com/84674087/142388063-37207317-3fdb-4a05-9c35-82e608f81dfc.png)
+
+- **PASSWORD:** ahy7MaeBo9
