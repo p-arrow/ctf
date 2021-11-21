@@ -365,24 +365,81 @@ if($data["showpassword"] == "yes") {
 - But we don't know the key nor its length to crack the XOR-encryption ... 
 - Well, we know how data looks during "setcookie" operation:
      - 1) data: `$d = array("showpassword" => "no", "bgcolor"=>"#ffffff");`
-     - 2) json_encode: `{"showpassword":"no","bgcolor":"#ffffff"}`
+     - 2) after json_encode: `{"showpassword":"no","bgcolor":"#ffffff"}`
      - 3) XOR-encryption
-     - 4) base64_encode: `ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=`
+     - 4) after base64_encode: `ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/133932669-ca29d2fa-a5a3-4f8c-bc24-76b286728bca.png)
 
-- And we know how the data should look like
-     - 1) data: `$d = array("showpassword" => "yes", "bgcolor"=>"#ffffff");`
-     - 2) json_encode: `{"showpassword":"yes","bgcolor":"#ffffff"}`
-     - 3) XOR-encryption
-     - 4) base64_encode: `???=`
+- Regarding XOR-encryption there is an important mechanism: **If two factors are known, the third can be xored (!)**
+- We have two factors:
+     - `xor_encrypt(json_encode($defaultdata))`
+     - `base64_decode("ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=")`
+- Now we have to use both factors inside the xor-function to retrieve the key
+- We modify the php code as below:
 
-- Let's see how the cookie value gets changed when we modify "bgcolor":
+```
+<?php
+##########################
+## RETRIEVE THE XOR KEY ##
+##########################
 
-bgcolor | cookie
-------- | -------
-#ffffff | ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**EV4sFxFe**aAw%3D
-#aaaaaa | ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**FlkrEBZZ**aAw%3D
-#bbbbbb | ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhS**FVooExVa**aAw%3D
+$defaultdata = array("showpassword" => "no", "bgcolor"=>"#ffffff");
 
-- 
+# If two factors are known, the third can be xored ! 
+
+function xor_encrypt($in) {
+    # Enter factor 1: ciphertext as key
+    $key = base64_decode("ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=");
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+    # Call function while input factor 2: plaintext
+    $key = xor_encrypt(json_encode($defaultdata));
+    echo "The key is " . $key . "\n";
+    # Output: The key is qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
+```
+
+- With the key **qw87** we can get the desired cookie value
+
+```
+<?php
+
+###################
+## MODIFY COOKIE ##
+###################
+    
+function xor_encrypt($in) {
+    # Enter factor 1: ciphertext as key
+    $key = "qw8J";
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+    # Create New Cookie
+    $modifieddata = array("showpassword" => "yes", "bgcolor"=>"#ffffff");
+    $new_cookie = base64_encode(xor_encrypt(json_encode($modifieddata)));
+    echo "New Cookie: " . $new_cookie . "%3D" . "\n";
+    # Output: New Cookie: ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK%3D
+?> 
+```
+
+- We enter the new cookie value and get the password presented:
+- **PASSWORD:** EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+
+<br />
+
+## Natas 12
