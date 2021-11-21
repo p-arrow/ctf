@@ -401,7 +401,7 @@ function xor_encrypt($in) {
 
     return $outText;
 }
-    # Call function while input factor 2: plaintext
+    # Call function and input factor 2: plaintext
     $key = xor_encrypt(json_encode($defaultdata));
     echo "The key is " . $key . "\n";
     # Output: The key is qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
@@ -441,5 +441,3 @@ function xor_encrypt($in) {
 - **PASSWORD:** EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
 
 <br />
-
-## Natas 12
