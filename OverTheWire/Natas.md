@@ -361,17 +361,23 @@ if($data["showpassword"] == "yes") {
          - ` $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);`
      3. The variable `$_REQUEST['bgcolor']`, which we entered in the mask, gets verified and saved inside the cookie:
          - `setcookie("data", base64_encode(xor_encrypt(json_encode($d))));`
-- We have to change the cookie-value of showpassword to **yes** in order to reveal the password
+- We have to change the cookie-value of "showpassword" to **yes** in order to reveal the password
 - But we don't know the key nor its length to crack the XOR-encryption ... 
-- Well, we know what should stand there before the data gets XOR-encrypted or decrypted:
-     - `$d = array("showpassword" => "no", "bgcolor"=>"#ffffff");`
-     - Cookie value: `ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=`
-     - Base64_decode: `UK"H+O%pSWh]UZ-T%UhR^,^h`
-     - after json_encode: `{"showpassword":"no","bgcolor":"#ffffff"}`
+- Well, we know how data looks during "setcookie" operation:
+     - 1) data: `$d = array("showpassword" => "no", "bgcolor"=>"#ffffff");`
+     - 2) json_encode: `{"showpassword":"no","bgcolor":"#ffffff"}`
+     - 3) XOR-encryption
+     - 4) base64_encode: `ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/133932669-ca29d2fa-a5a3-4f8c-bc24-76b286728bca.png)
 
-- Let's see how much the cookie value gets changed when we modify the bgcolor:
+- And we know how the data should look like
+     - 1) data: `$d = array("showpassword" => "yes", "bgcolor"=>"#ffffff");`
+     - 2) json_encode: `{"showpassword":"yes","bgcolor":"#ffffff"}`
+     - 3) XOR-encryption
+     - 4) base64_encode: `???=`
+
+- Let's see how the cookie value gets changed when we modify "bgcolor":
 
 bgcolor | cookie
 ------- | -------
