@@ -95,9 +95,9 @@ int main(){
 
 - From reading the sourcecode we learn that an empty env-variable EGG returns above shown statement
 - If we assign a value to EGG then these lines gets executed:
-    - `ret = getenv("EGG");`: getenv() reads from EGG and is assigned to variable "ret"
-    - `ret();`: the function ret() is called
-- The principle of function "getenv()": 
+    - `ret = getenv("EGG");`: getenv() reads from EGG and the value is assigned to variable "ret"
+    - `ret();`: the function ret() is then called
+- The principle of function `getenv()`: 
     - Retrieve a C-string containing the value of the environment variable
     - If there is no variable, the function returns a null pointer
 - To assign a value to EGG we enter following code snippet: `export EGG=aaa`
