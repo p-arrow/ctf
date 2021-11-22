@@ -70,7 +70,30 @@ int main(){
 
 ## Narnia 1
 
+![grafik](https://user-images.githubusercontent.com/84674087/142846849-81325393-f307-4a49-be4c-4455620f6bec.png)
+
 #### Solution 
+- We check the **sourcode of narnia1.c**:
+```
+#include <stdio.h>
+
+int main(){
+    int (*ret)();
+
+    if(getenv("EGG")==NULL){
+        printf("Give me something to execute at the env-variable EGG\n");
+        exit(1);
+    }
+
+    printf("Trying to execute EGG!\n");
+    ret = getenv("EGG");
+    ret();
+
+    return 0;
+}
+```
+
+
 
 <br />
 
