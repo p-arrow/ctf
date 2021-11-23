@@ -169,6 +169,17 @@ int main(int argc, char * argv[]){
 
 - The function **strcpy**: `char * strcpy ( char * destination, const char * source );`
 - It copies the C string pointed by source (**argv[1]**) into the array pointed by destination (**buf**), including the terminating null character
+- **strcpy** doesn’t perform any memory boundary check
+- Therefore, we are able to write more than 128 characters into **buf** and buffer overflow occurs
+    - For example: ```./narnia2 `python -c "print('A' * 128)"` ``` 
+- Then, we have to figure out how to overwrite the return address of the function call by replacing it with crafted shellcode
+- Let's take a look with `gdb ./narnia2`, followed by `disass main`
 
+![grafik](https://user-images.githubusercontent.com/84674087/143130183-a9725c3d-8ed4-412f-aadd-71f9ce1ad2be.png)
+
+- We see **strcpy** at address ..
+- Examine this part further: `disass strcpy`
+
+![grafik](https://user-images.githubusercontent.com/84674087/143134970-3b1a4e6b-1acc-407c-8c95-0a3dc9048a15.png)
 
 <br />
