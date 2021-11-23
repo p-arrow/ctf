@@ -16,7 +16,7 @@ levels could be quite tricky.
 ![grafik](https://user-images.githubusercontent.com/84674087/142839936-9a2f374f-9862-45a3-831b-77ca618ca65a.png)
 
 #### Solution
-- We check the **sourcecode of narnia0.c**
+- We check the **source code of narnia0.c**
 ```
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,7 +73,7 @@ int main(){
 ![grafik](https://user-images.githubusercontent.com/84674087/142846849-81325393-f307-4a49-be4c-4455620f6bec.png)
 
 #### Solution 
-- We check the **sourcecode of narnia1.c**:
+- We check the **source code of narnia1.c**:
 ```
 #include <stdio.h>
 
@@ -93,12 +93,12 @@ int main(){
 }
 ```
 
-- From reading the sourcecode we learn that an empty env-variable EGG returns above shown statement
-- If we assign a value to EGG then these lines gets executed:
+- From reading the source code we learn that an empty env-variable EGG returns above shown statement
+- The code assigns a value to EGG and below lines gets executed:
     - `ret = getenv("EGG");`: getenv() reads from EGG and the value is assigned to variable "ret"
     - `ret();`: the function ret() is then called
 - The principle of function `getenv()`: 
-    - Retrieve a C-string containing the value of the environment variable
+    - Retrieve C-string containing the value of the environment variable
     - If there is no variable, the function returns a null pointer
 - To assign a value to EGG we enter following code snippet: `export EGG=aaa`
 - What happens?
@@ -144,4 +144,31 @@ export EGG=`python -c "print('\xeb\x11\x5e\x31\xc9\xb1\x21\x80\x6c\x0e\xff\x01\x
 
 <br />
 
+## Narnia 2
 
+#### Solution
+- Let's check the source code:
+```
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(int argc, char * argv[]){
+    char buf[128];
+
+    if(argc == 1){
+        printf("Usage: %s argument\n", argv[0]);
+        exit(1);
+    }
+    strcpy(buf,argv[1]);
+    printf("%s", buf);
+
+    return 0;
+}
+```
+
+- The function **strcpy**: `char * strcpy ( char * destination, const char * source );`
+- It copies the C string pointed by source (**argv[1]**) into the array pointed by destination (**buf**), including the terminating null character
+
+
+<br />
