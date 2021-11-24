@@ -172,6 +172,7 @@ int main(int argc, char * argv[]){
 - **strcpy** doesn’t perform any memory boundary check
 - Therefore, we are able to write more than 128 characters into **buf** and buffer overflow occurs
     - For example: ```./narnia2 `python -c "print('A' * 128)"` ``` 
+    - Or jointly with gdb: ``` gdb --args narnia2 `python -c "print('A' * 128)"` ``` 
 - Then, we have to figure out how to overwrite the return address of the function call by replacing it with crafted shellcode
 - Let's take a look with `gdb ./narnia2`, followed by `disass main`
 
