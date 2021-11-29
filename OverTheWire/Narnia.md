@@ -11,6 +11,13 @@ levels could be quite tricky.
 <br />
 <br />
 
+## Table of Contents
+1. [Narnia 0](https://github.com/p-arrow/ctf/blob/main/OverTheWire/Narnia.md#narnia-0)
+2. [Narnia 1](https://github.com/p-arrow/ctf/blob/main/OverTheWire/Narnia.md#narnia-1)
+3. [Narnia 2](https://github.com/p-arrow/ctf/blob/main/OverTheWire/Narnia.md#narnia-2)
+
+<br />
+
 ## Narnia 0
 
 ![grafik](https://user-images.githubusercontent.com/84674087/142839936-9a2f374f-9862-45a3-831b-77ca618ca65a.png)
