@@ -15,6 +15,7 @@ levels could be quite tricky.
 1. [Narnia 0](https://github.com/p-arrow/ctf/blob/main/OverTheWire/Narnia.md#narnia-0)
 2. [Narnia 1](https://github.com/p-arrow/ctf/blob/main/OverTheWire/Narnia.md#narnia-1)
 3. [Narnia 2](https://github.com/p-arrow/ctf/blob/main/OverTheWire/Narnia.md#narnia-2)
+4. [Narnia 3](https://github.com/p-arrow/ctf/blob/main/OverTheWire/Narnia.md#narnia-3)
 
 <br />
 
