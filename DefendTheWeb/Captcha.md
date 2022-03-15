@@ -61,7 +61,8 @@ def captcha():
         # Input answer
         driver.find_element(by="id", value="answer").send_keys(string)
         driver.execute_script('document.forms[1].submit();')
-
+        driver.refresh()
+        
 captcha()
 
 ```
