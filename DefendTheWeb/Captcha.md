@@ -2,7 +2,7 @@
 
 ![grafik](https://user-images.githubusercontent.com/84674087/138234030-3f8ec05d-1eef-4f17-a2a6-70933cdbb68b.png)
 
-#### Solution
+### Solution
 - My first thought
 ```
 //Access captcha.php image
@@ -68,3 +68,71 @@ captcha()
 ```
 
 <br />
+
+## Captcha 2 / Captcha
+
+![image](https://user-images.githubusercontent.com/84674087/158890464-4486b743-a5ff-4b64-b2e5-48b1ab11276f.png)
+
+### Solution
+```
+import pytesseract
+from selenium import webdriver
+from PIL import Image
+from PIL import ImageChops
+
+def emoji2text():
+    # crop image into equal parts, one emoji per cropped image
+    for i in range(0,15):
+        with Image.open("./captcha2.png") as im:
+            width, height = im.size
+            # 4-tuple (left, upper, right, lower)
+            area = (5+(i*26), 0, 31+(i*26), height)
+            im = im.crop(area)
+            im = im.convert("L")
+            im.save("./download/"+str(i)+".png")
+
+    # compare cropped images with reference images and return answer-string
+    ref = {1: ":D", 2: ":)", 3: ":p", 4: ":(", 5: ";)", 6: "B)", 7: ":@", 8: ":o", 9: ":s", 10: ":|", 11: ":/", 12: "<3"}
+    string = ""
+
+    for i in range (0,15):
+        for j in range (1,13):
+            image_one = Image.open("download/"+str(i)+".png")
+            image_two = Image.open("references/"+str(j)+".png")
+
+            diff = ImageChops.difference(image_one, image_two)
+            if not diff.getbbox():
+                string += ref[j]
+    return string
+
+def captcha():
+    URL = "https://defendtheweb.net/playground/captcha2"
+    # Setup Selenium
+    driver = webdriver.Firefox()
+    # Credentials
+    username = "xxx"
+    password = "yyy"
+    # head to login page
+    driver.get(URL)
+    # find username/email field and send the username itself to the input field
+    driver.find_element(by="id", value="login-username").send_keys(username)
+    # find password input field and insert password as well
+    driver.find_element(by="id", value="login-password").send_keys(password)
+    # click login button
+    driver.find_element(by="tag name", value='button').click()
+    # click Dismiss button
+    driver.find_element(by="link text", value='Dismiss').click()
+    # Trial & Error
+    for i in range (0,3):
+        # Get captcha
+        captcha = driver.find_elements(by="tag name", value='img')[1]
+        captcha.screenshot("./captcha2.png")
+        # Convert captcha to string
+        string = emoji2text()
+        # Input answer
+        driver.find_element(by="id", value="answer").send_keys(string)
+        driver.execute_script('document.forms[1].submit();')
+        driver.refresh()
+
+captcha()
+```
