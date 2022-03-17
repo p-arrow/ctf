@@ -136,3 +136,9 @@ def captcha():
 
 captcha()
 ```
+
+## Captcha 3 / Captcha
+
+![image](https://user-images.githubusercontent.com/84674087/158890970-a6e9b8e2-dc87-4809-a487-54be2e034dcc.png)
+
+### Solution
