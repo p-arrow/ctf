@@ -31,3 +31,12 @@
 9. We recognize the string **JE74toJNZ75** at address `0060FE54` 🙂
 
 <br />
+
+##  Variable switcheroo / Cracking
+
+![image](https://user-images.githubusercontent.com/84674087/159357453-1feff0fb-f9c5-40dd-99ba-b73a6de0b8bd.png)
+
+## Solution
+
+![image](https://user-images.githubusercontent.com/84674087/159357237-837d1bfd-1ae7-4a06-8cb1-192c22cf4af4.png)
+
