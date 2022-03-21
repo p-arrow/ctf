@@ -36,7 +36,12 @@ All those tools mentioned above give us a first impression about what this .exe 
 
 ![grafik](https://user-images.githubusercontent.com/84674087/138116134-0b1fcec7-1fe6-4cec-9947-358ba2a5d337.png)
 
-...
+![image](https://user-images.githubusercontent.com/84674087/159350890-1165215a-b663-4806-9b6f-ccbd8978cf77.png)
+
+![image](https://user-images.githubusercontent.com/84674087/159351712-de0570b1-ac48-4d70-9daf-746470aa9aed.png)
+
+![image](https://user-images.githubusercontent.com/84674087/159351823-0ec8d1eb-cf19-4d71-af1c-8e7fffb1a7a1.png)
+
 
 Finally we find the password: **JE74toJNZ75** 🙂
 
